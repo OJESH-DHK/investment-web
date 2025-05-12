@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from .models import Services
+from .models import Projects
+from .models import BlogDetails
+from .models import Team
+from .models import Testimonial
 
 # Create your views here.
 def about(request):
@@ -8,14 +13,34 @@ def blog(request):
 def contact(request):
     return render(request, 'contact.html')
 def faq(request):
-    return render(request, 'faq.html')
+    return render(request, 'faqs.html')
 def index(request):
-    return render(request, 'index.html')
+    services = Services.objects.all()
+    projects = Projects.objects.all()
+    blogs = BlogDetails.objects.all()
+    teams = Team.objects.all()
+    testimonials = Testimonial.objects.all()
+    
+
+    context = {
+        'services': services,
+        'projects': projects,
+        'blogs' : blogs,
+        'teams' : teams,
+        'testimonials' : testimonials,
+        
+    }
+    return render(request, 'index.html', context)
 def projects(request):
-    return render(request, 'projects.html')
+    return render(request, 'project.html')
 def services(request):
-    return render(request, 'services.html')
+    services = Services.objects.all()
+    return render(request, 'service.html', {'services': services})
+
 def team(request):
     return render(request, 'team.html')
 def testimonials(request):
-    return render(request, 'testimonials.html')
+    return render(request, 'testimonial.html')
+
+def fourzerofour(request):
+    return render(request,'404.html')
