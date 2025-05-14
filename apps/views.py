@@ -4,10 +4,16 @@ from .models import Projects
 from .models import BlogDetails
 from .models import Team
 from .models import Testimonial
+from .models import Faq
 
 # Create your views here.
 def about(request):
-    return render(request, 'about.html')
+    teams = Team.objects.all()
+    context = {
+
+        'teams' : teams,
+    }
+    return render(request, 'about.html', context)
 def blog(request):
     return render(request, 'blog.html')
 def contact(request):
@@ -20,6 +26,7 @@ def index(request):
     blogs = BlogDetails.objects.all()
     teams = Team.objects.all()
     testimonials = Testimonial.objects.all()
+    faqs = Faq.objects.all()
     
 
     context = {
@@ -28,14 +35,27 @@ def index(request):
         'blogs' : blogs,
         'teams' : teams,
         'testimonials' : testimonials,
-        
+        'faqs': faqs,
     }
     return render(request, 'index.html', context)
 def projects(request):
-    return render(request, 'project.html')
+    projects = Projects.objects.all()
+    faqs = Faq.objects.all()
+    context = {
+        'projects': projects,
+        'faqs': faqs,
+    }
+    return render(request, 'project.html',context)
 def services(request):
     services = Services.objects.all()
-    return render(request, 'service.html', {'services': services})
+    testimonials = Testimonial.objects.all()
+    faqs = Faq.objects.all()
+    context = {
+        'services': services,
+        'testimonials' : testimonials,
+        'faqs': faqs,
+    }
+    return render(request, 'service.html', context)
 
 def team(request):
     return render(request, 'team.html')

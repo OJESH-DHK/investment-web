@@ -6,11 +6,13 @@ from .models import Projects
 from .models import BlogDetails
 from .models import Team
 from .models import Testimonial
+from .models import Faq
 
 admin.site.register(Services)
 admin.site.register(Projects)
 admin.site.register(BlogDetails)
 admin.site.register(Team)
 admin.site.register(Testimonial)
+admin.site.register(Faq)
 
 
