@@ -5,6 +5,11 @@ from .models import BlogDetails
 from .models import Team
 from .models import Testimonial
 from .models import Faq
+from .forms import ContactForm
+from django.contrib import messages
+from django.shortcuts import redirect
+
+
 
 # Create your views here.
 def about(request):
@@ -14,12 +19,38 @@ def about(request):
         'teams' : teams,
     }
     return render(request, 'about.html', context)
+
+
 def blog(request):
-    return render(request, 'blog.html')
+    blogs = BlogDetails.objects.all()
+    context={
+        'blogs':blogs
+    }
+    return render(request, 'blog.html', context)
+
+
 def contact(request):
-    return render(request, 'contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Thank you for contacting us!')
+            return redirect('contact')
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})
+
+
+
 def faq(request):
-    return render(request, 'faqs.html')
+    faqs = Faq.objects.all()
+    context = {
+        'faqs': faqs,
+    }
+    return render(request, 'faqs.html',context)
+
+
+
 def index(request):
     services = Services.objects.all()
     projects = Projects.objects.all()
@@ -27,8 +58,6 @@ def index(request):
     teams = Team.objects.all()
     testimonials = Testimonial.objects.all()
     faqs = Faq.objects.all()
-    
-
     context = {
         'services': services,
         'projects': projects,
@@ -38,6 +67,8 @@ def index(request):
         'faqs': faqs,
     }
     return render(request, 'index.html', context)
+
+
 def projects(request):
     projects = Projects.objects.all()
     faqs = Faq.objects.all()
@@ -46,6 +77,8 @@ def projects(request):
         'faqs': faqs,
     }
     return render(request, 'project.html',context)
+
+
 def services(request):
     services = Services.objects.all()
     testimonials = Testimonial.objects.all()
@@ -58,9 +91,23 @@ def services(request):
     return render(request, 'service.html', context)
 
 def team(request):
-    return render(request, 'team.html')
+    teams = Team.objects.all()
+    context = {
+        'teams' : teams,
+
+    }
+    return render(request, 'team.html',context)
+
+
 def testimonials(request):
-    return render(request, 'testimonial.html')
+    testimonials = Testimonial.objects.all()
+    context = {
+        'testimonials' : testimonials,
+    }
+    return render(request, 'testimonial.html',context)
 
 def fourzerofour(request):
     return render(request,'404.html')
+
+
+

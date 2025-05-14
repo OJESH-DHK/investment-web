@@ -55,7 +55,7 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 col-xl-5 wow fadeInLeft" data-wow-delay="0.1s">
                         <div class="about-img">
-                            <img src="{% static 'img/about-3.jpg' %}" class="img-fluid w-100 rounded-top" alt="Image">
+                            <img src="{% static 'img/about-3.png' %}" class="img-fluid w-100 rounded-top bg-white" alt="Image">
                             <img src="{% static 'img/about-2.jpg' %}" class="img-fluid w-100 rounded-bottom" alt="Image">
                         </div>
                     </div>
@@ -258,11 +258,10 @@
                             <div class="team-img">
                                 <img src="{{ team.image.url }}" class="img-fluid w-100 rounded-top" alt="Image">
                                 <div class="team-icon">
-                                    <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href=""><i class="fas fa-share-alt"></i></a>
                                     <div class="team-icon-share">
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href=""><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href=""><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-0" href=""><i class="fab fa-instagram"></i></a>
+                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href="{{team.instagram_link}}"><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href="{{team.facebook_link}}"><i class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-0" href="{{team.twitter_link}}"><i class="fab fa-instagram"></i></a>
                                     </div>
                                 </div>
                             </div>

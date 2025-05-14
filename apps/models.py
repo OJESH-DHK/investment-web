@@ -58,6 +58,15 @@ class Faq(models.Model):
     def __str__(self):
         return self.title
 
+class Contact(models.Model):
+    name = models.CharField(max_length=100)  # Corrected from models.models.CharField to models.CharField
+    email = models.EmailField()  # Corrected 'emaai' to 'EmailField'
+    subject = models.CharField(max_length=200)  # Use CharField for the subject
+    message = models.TextField()  # Use TextField for the message
+
+    def __str__(self):
+        return self.name
+
 
 
 

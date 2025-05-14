@@ -7,6 +7,7 @@ from .models import BlogDetails
 from .models import Team
 from .models import Testimonial
 from .models import Faq
+from .models import Contact
 
 admin.site.register(Services)
 admin.site.register(Projects)
@@ -14,5 +15,6 @@ admin.site.register(BlogDetails)
 admin.site.register(Team)
 admin.site.register(Testimonial)
 admin.site.register(Faq)
+admin.site.register(Contact)
 
 

@@ -48,6 +48,7 @@
      
                             <div class="col-xl-7 mb-5">
                                 <div class="about-customer d-flex position-relative">
+                                    
                                     <img src="{% static 'img/customer-img-1.jpg' %}" class="img-fluid btn-xl-square position-absolute" style="left: 0; top: 0;"  alt="Image">
                                     <img src="{% static 'img/customer-img-2.jpg' %}" class="img-fluid btn-xl-square position-absolute" style="left: 45px; top: 0;" alt="Image">
                                     <img src="{% static 'img/customer-img-3.jpg' %}" class="img-fluid btn-xl-square position-absolute" style="left: 90px; top: 0;" alt="Image">
@@ -116,11 +117,11 @@
                             <div class="team-img">
                                 <img src="{{ team.image.url }}" class="img-fluid w-100 rounded-top" alt="Image">
                                 <div class="team-icon">
-                                    <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href=""><i class="fas fa-share-alt"></i></a>
+
                                     <div class="team-icon-share">
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href=""><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href=""><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-0" href=""><i class="fab fa-instagram"></i></a>
+                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href="{{team.instagram_link}}"><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href="{{team.facebook_link}}"><i class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-0" href="{{team.twitter_link}}"><i class="fab fa-instagram"></i></a>
                                     </div>
                                 </div>
                             </div>
