@@ -1,0 +1,35 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ action }} Project{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} Project</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Project Title</label>
+      <input type="text" name="title" id="title" class="form-control" placeholder="Enter project title" value="{{ project.title|default_if_none:'' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="content" class="form-label">Project Description</label>
+      <textarea name="content" id="content" rows="5" class="form-control" placeholder="Enter project description">{{ project.content|default_if_none:'' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Project Image</label>
+      <input type="file" name="image" id="image" class="form-control">
+      {% if project.image %}
+        <div class="mt-2">
+          <p>Current Image:</p>
+          <img src="{{ project.image.url }}" alt="Current Image" width="150">
+        </div>
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ action }}</button>
+    <a href="{% url 'admin_editproject' %}" class="btn btn-seconxdary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

@@ -19,7 +19,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from apps.views import index,about,blog,contact,faq,projects,services,team,testimonials,fourzerofour
+from apps.admin_views import admin_dashboard
 
+from apps.admin_views import admin_editproject
+from apps.admin_views import admin_addproject
+from apps.admin_views import delete_project
+from apps.admin_views import admin_editproject_form
+from apps.admin_views import ad_service
+from apps.admin_views import ad_blog
+from apps.admin_views import ad_contact
+from apps.admin_views import ad_team
+from apps.admin_views import ad_feedback
+from apps.admin_views import ad_faq, ad_editservice, ad_addservice
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +43,32 @@ urlpatterns = [
     path('services/',services,name='services'),
     path('team/',team,name='team'),
     path('testimonials/',testimonials,name='testimonials'),
-    path("404/",fourzerofour,name='fourzerofour')
+    path("404/",fourzerofour,name='fourzerofour'),
+
+    #admin urls
+    path('admin_dashboard/',admin_dashboard,name='admin_dashboard'),
+#admin project urls
+    path('admin_editproject/', admin_editproject, name='admin_editproject'),
+    path('admin_addproject/',admin_addproject,name='admin_addproject'),
+    path('projects/delete/<int:id>/', delete_project, name='admin_deleteproject'),
+    path('admin_editproject/<int:id>/', admin_editproject_form, name='admin_editproject_form'),
+#admin services urls
+    path('ad_service/',ad_service,name='ad_service'),
+    path('ad_editservice/',ad_editservice,name='ad_editservice'),
+    path('ad_addservice',ad_addservice,name='ad_addservice'),
+
+#admin blog urls
+    path('ad_blog/',ad_blog,name='ad_blog'),
+#admin contact urls
+    path('ad_contact/',ad_contact,name='ad_contact'),
+#admin team urls
+    path('ad_team/',ad_team,name='ad_team'),
+#admin feedback urls
+    path('ad_feedback/',ad_feedback,name='ad_feedback'),
+#admin faq urls
+    path('ad_faq/',ad_faq,name='ad_faq')
+
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

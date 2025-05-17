@@ -1,0 +1,40 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ action }} Service{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} Service</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Service Title</label>
+      <input type="text" name="title" id="title" class="form-control" placeholder="Enter service title" value="{{ service.title|default_if_none:'' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="content" class="form-label">Service Content</label>
+      <textarea name="content" id="content" rows="5" class="form-control" placeholder="Enter service content">{{ service.content|default_if_none:'' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Service Image</label>
+      <input type="file" name="image" id="image" class="form-control">
+      {% if service.image %}
+        <div class="mt-2">
+          <p>Current Image:</p>
+          <img src="{{ service.image.url }}" alt="Current Image" width="150">
+        </div>
+      {% endif %}
+    </div>
+
+<a href="{% url 'ad_service' %}" class="btn btn-primary">
+  <i class="bi bi-plus-circle me-1"></i> Add Project
+</a>
+
+
+    <a href="{% url 'ad_service' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
