@@ -1,0 +1,49 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ action }} Contact{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} Contact</h2>
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control"
+             placeholder="Enter name"
+             value="{{ contact.name|default:'' }}">
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" id="email" class="form-control"
+             placeholder="Enter email"
+             value="{{ contact.email|default:'' }}">
+    </div>
+
+    <!-- Subject -->
+    <div class="mb-3">
+      <label for="subject" class="form-label">Subject</label>
+      <input type="text" name="subject" id="subject" class="form-control"
+             placeholder="Enter subject"
+             value="{{ contact.subject|default:'' }}">
+    </div>
+
+    <!-- Message -->
+    <div class="mb-3">
+      <label for="message" class="form-label">Message</label>
+      <textarea name="message" id="message" rows="5" class="form-control"
+                placeholder="Enter message">{{ contact.message|default:'' }}</textarea>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i> {{ action }} Contact
+    </button>
+
+    <a href="{% url 'ad_contact' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

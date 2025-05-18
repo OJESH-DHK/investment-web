@@ -1,0 +1,68 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ action }} Team Member{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} Team Member</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control"
+             placeholder="Enter name"
+             value="{{ team.name|default:'' }}">
+    </div>
+
+    <!-- Position -->
+    <div class="mb-3">
+      <label for="position" class="form-label">Position</label>
+      <textarea name="position" id="position" rows="3" class="form-control"
+                placeholder="Enter position">{{ team.position|default:'' }}</textarea>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" name="image" id="image" class="form-control">
+      {% if team.image %}
+        <div class="mt-2">
+          <p>Current Image:</p>
+          <img src="{{ team.image.url }}" alt="Current Image" width="150">
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Instagram -->
+    <div class="mb-3">
+      <label for="instagram_link" class="form-label">Instagram Link</label>
+      <input type="url" name="instagram_link" id="instagram_link" class="form-control"
+             placeholder="Enter Instagram URL"
+             value="{{ team.instagram_link|default:'' }}">
+    </div>
+
+    <!-- Facebook -->
+    <div class="mb-3">
+      <label for="facebook_link" class="form-label">Facebook Link</label>
+      <input type="url" name="facebook_link" id="facebook_link" class="form-control"
+             placeholder="Enter Facebook URL"
+             value="{{ team.facebook_link|default:'' }}">
+    </div>
+
+    <!-- Twitter -->
+    <div class="mb-3">
+      <label for="twitter_link" class="form-label">Twitter Link</label>
+      <input type="url" name="twitter_link" id="twitter_link" class="form-control"
+             placeholder="Enter Twitter URL"
+             value="{{ team.twitter_link|default:'' }}">
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i> {{ action }} Team
+    </button>
+    <a href="{% url 'ad_team' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

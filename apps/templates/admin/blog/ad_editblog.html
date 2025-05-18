@@ -1,33 +1,44 @@
 {% extends "admin_base.html" %}
 
-{% block title %}Edit Project{% endblock %}
+{% block title %}Edit Blog{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h2>Edit Project</h2>
+  <h2>Edit Blog</h2>
 
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" name="title" id="title" class="form-control" value="{{ project.title }}" required>
+      <input type="text" name="title" id="title" class="form-control" value="{{ blog.title }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" class="form-control" rows="4" required>{{ blog.description }}</textarea>
     </div>
 
     <div class="mb-3">
       <label for="content" class="form-label">Content</label>
-      <textarea name="content" id="content" class="form-control" rows="5" required>{{ project.content }}</textarea>
+      <textarea name="content" id="content" class="form-control" rows="5" required>{{ blog.content }}</textarea>
     </div>
 
     <div class="mb-3">
       <label for="image" class="form-label">Image</label><br>
-      {% if project.image %}
-      <img src="{{ project.image.url }}" alt="Project Image" width="200"><br><br>
+      {% if blog.image %}
+        <img src="{{ blog.image.url }}" alt="Blog Image" width="200"><br><br>
       {% endif %}
       <input type="file" name="image" id="image" class="form-control">
     </div>
 
-    <button type="submit" class="btn btn-primary">Update Project</button>
-    <a href="#" class="btn btn-secondary">Cancel</a>
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input type="text" name="author" id="author" class="form-control" value="{{ blog.author }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Blog</button>
+    <a href="{% url 'ad_blog' %}" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
 {% endblock %}

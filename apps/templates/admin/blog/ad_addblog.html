@@ -1,0 +1,60 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ action }} Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} Blog</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" id="title" class="form-control"
+             placeholder="Enter blog title"
+             value="{{ blog.title|default:'' }}">
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" rows="3" class="form-control"
+                placeholder="Enter blog description">{{ blog.description|default:'' }}</textarea>
+    </div>
+
+    <!-- Content -->
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <textarea name="content" id="content" rows="6" class="form-control"
+                placeholder="Enter full blog content">{{ blog.content|default:'' }}</textarea>
+    </div>
+
+    <!-- Author -->
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input type="text" name="author" id="author" class="form-control"
+             placeholder="Enter author name"
+             value="{{ blog.author|default:'Admin' }}">
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" name="image" id="image" class="form-control">
+      {% if blog.image %}
+        <div class="mt-2">
+          <p>Current Image:</p>
+          <img src="{{ blog.image.url }}" alt="Current Image" width="150">
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Buttons -->
+         <button type="submit" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i> {{ action }} ADD
+    </button>
+    <button type="submit" class="btn btn-primary">{{ action }}</button>
+    <a href="{% url 'ad_blog' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

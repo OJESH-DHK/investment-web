@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-9"></div>
     <div class="col-md-3 text-end mb-2">
-      <a href="{% url 'admin_addproject' %}" class="btn btn-sm btn-success">Add Contacts</a>
+      <a href="{% url 'ad_addcontact'%}" class="btn btn-sm btn-success">Add Contacts</a>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
     <td>{{ contact.message }}</td>
     <td>
       <!-- You can add Edit/Delete buttons here if needed -->
-      <a href="#" class="btn btn-sm btn-primary">Edit</a>
+      <a href="{% url 'ad_editcontact' contact.id %}" class="btn btn-sm btn-primary">Edit</a>
       <button type="button" 
               class="btn btn-sm btn-danger delete-btn" 
               data-bs-toggle="modal" 
@@ -89,9 +89,9 @@
 
     deleteButtons.forEach(button => {
       button.addEventListener('click', function () {
-        const projectId = this.getAttribute('data-id');
+        const contactId = this.getAttribute('data-id');
         // Use Django URL pattern with project ID dynamically
-        deleteForm.action = `/projects/delete/${projectId}/`;
+        deleteForm.action = `/contact/delete/${contactId}/`;
       });
     });
   });

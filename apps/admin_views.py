@@ -92,11 +92,41 @@ def ad_addservice(request):
                 content=content,
                 image=image
             )
-            return redirect('ad_addservice')  # Redirect to clear the form or show success
+            return redirect('ad_service')  # Redirect to clear the form or show success
     return render(request,'admin/service/ad_addservice.html')
 
-def ad_editservice(request):
-    return render(request,'admin/service/ad_editservice.html')
+
+
+
+
+def ad_editservice(request, id):
+    service = get_object_or_404(Services, id=id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        image = request.FILES.get('image')
+
+        # Update fields
+        service.title = title
+        service.content = content
+
+        # If a new image is uploaded, update it
+        if image:
+            service.image = image
+
+        service.save()  # Save changes to DB
+        return redirect('ad_service')  # Redirect to service list or detail page
+
+    return render(request, 'admin/service/ad_editservice.html', {
+        'service': service 
+    })
+
+def delete_service(request, id):
+    service = get_object_or_404(Services, id=id)
+    if request.method == 'POST':
+        service.delete()
+    return redirect('ad_service')
 
 
 #admin blog
@@ -107,8 +137,63 @@ def ad_blog(request):
     }
     return render(request,'admin/blog/ad_blog.html',context)
 
-def ad_editblog(request):
-    return render(request,'admin/service/aad_editblog.html')
+
+def ad_addblog(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        content = request.POST.get('content', 'This is default content')
+        image = request.FILES.get('image')
+
+        if title and description and image:
+            BlogDetails.objects.create(
+                title=title,
+                description=description,
+                content=content,
+                image=image,
+                author="Admin"  # or dynamically: request.user.username if using authentication
+            )
+            return redirect('ad_blog')  # Replace with your actual blog list view name
+
+    return render(request, 'admin/blog/ad_addblog.html', {
+        'action': 'Add',
+        'blog': {}
+    })
+
+def delete_blog(request, id):
+    blog = get_object_or_404(BlogDetails, id=id)
+    if request.method == 'POST':
+        blog.delete()
+    return redirect('ad_blog')
+
+
+
+
+def ad_editblog(request, id):
+    blog = get_object_or_404(BlogDetails, id=id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        content = request.POST.get('content')
+        image = request.FILES.get('image')
+        author= request.POST.get('author')
+
+        blog.title = title
+        blog.description = description
+        blog.content = content
+        blog.author = author
+
+        if image:
+            blog.image = image
+
+        blog.save()
+        return redirect('ad_blog')  # Adjust to your blog lis hi this is me 
+
+    return render(request, 'admin/blog/ad_editblog.html', {'blog': blog, 'action': 'Edit'})
+
+
+
 
 #admin contact
 def ad_contact(request):
@@ -118,6 +203,61 @@ def ad_contact(request):
     }
     return render(request,'admin/contact/ad_contact.html',context)
 
+
+def ad_editcontact(request, id):
+    contact = get_object_or_404(Contact, id=id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        # Update fields
+        contact.name = name
+        contact.email = email
+        contact.subject = subject
+        contact.message = message
+
+        contact.save()
+        return redirect('ad_contact')  # Replace with the actual name of your contact list view
+
+    return render(request, 'admin/contact/ad_editcontact.html', {'contact': contact, 'action': 'Edit'})
+
+
+def delete_contact(request, id):
+    contact = get_object_or_404(Contact, id=id)
+    if request.method == 'POST':
+        contact.delete()
+    return redirect('ad_contact')
+
+
+def ad_addcontact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        if name and email and subject and message:
+            Contact.objects.create(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message
+            )
+            return redirect('ad_contact')  # Update with your contact list view name
+
+    return render(request, 'admin/contact/ad_addcontact.html', {
+        'action': 'Add',
+        'contact': {}
+    })
+
+
+
+
+
+
 #admin team
 def ad_team(request):
     teams = Team.objects.all()
@@ -125,6 +265,69 @@ def ad_team(request):
         'teams': teams,
     }
     return render(request,'admin/team/ad_team.html',context)
+
+def delete_team(request, id):
+    team = get_object_or_404(Team, id=id)
+    if request.method == 'POST':
+        team.delete()
+    return redirect('ad_team')
+
+def ad_addteam(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        position = request.POST.get('position')
+        instagram_link = request.POST.get('instagram_link')
+        facebook_link = request.POST.get('facebook_link')
+        twitter_link = request.POST.get('twitter_link')
+        image = request.FILES.get('image')  # For file input
+
+        if name and position and image:
+            Team.objects.create(
+                name=name,
+                position=position,
+                image=image,
+                instagram_link=instagram_link,
+                facebook_link=facebook_link,
+                twitter_link=twitter_link
+            )
+            return redirect('ad_team')  # Replace with your team list view name
+
+    return render(request, 'admin/team/ad_addteam.html', {
+        'action': 'Add',
+        'team': {}
+    })
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Team
+
+def ad_editteam(request, id):
+    team = get_object_or_404(Team, id=id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        position = request.POST.get('position')
+        instagram_link = request.POST.get('instagram_link')
+        facebook_link = request.POST.get('facebook_link')
+        twitter_link = request.POST.get('twitter_link')
+        image = request.FILES.get('image')
+
+        # Update fields
+        team.name = name
+        team.position = position
+        team.instagram_link = instagram_link
+        team.facebook_link = facebook_link
+        team.twitter_link = twitter_link
+
+        if image:
+            team.image = image  # Only update image if a new one is uploaded
+
+        team.save()
+        return redirect('ad_team')  # Replace with your team list view name
+
+    return render(request, 'admin/team/ad_editteam.html', {
+        'team': team,
+        'action': 'Edit'
+    })
+
 
 #admin feedback
 def ad_feedback(request):

@@ -1,32 +1,32 @@
 {% extends "admin_base.html" %}
 
-{% block title %}Edit Project{% endblock %}
+{% block title %}Edit Service{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h2>Edit Project</h2>
+  <h2>Edit Service</h2>
 
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" name="title" id="title" class="form-control" value="{{ project.title }}" required>
+      <input type="text" name="title" id="title" class="form-control" value="{{ service.title }}" required>
     </div>
 
     <div class="mb-3">
       <label for="content" class="form-label">Content</label>
-      <textarea name="content" id="content" class="form-control" rows="5" required>{{ project.content }}</textarea>
+      <textarea name="content" id="content" class="form-control" rows="5" required>{{ service.content }}</textarea>
     </div>
 
     <div class="mb-3">
       <label for="image" class="form-label">Image</label><br>
-      {% if project.image %}
-      <img src="{{ project.image.url }}" alt="Project Image" width="200"><br><br>
+      {% if service.image %}
+      <img src="{{ service.image.url }}" alt="Service Image" width="200"><br><br>
       {% endif %}
       <input type="file" name="image" id="image" class="form-control">
     </div>
 
-    <button type="submit" class="btn btn-primary">Update Project</button>
+    <button type="submit" class="btn btn-primary">Update Service</button>
     <a href="{% url 'ad_service' %}" class="btn btn-secondary">Cancel</a>
   </form>
 </div>

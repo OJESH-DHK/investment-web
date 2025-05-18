@@ -30,8 +30,8 @@ from apps.admin_views import ad_blog
 from apps.admin_views import ad_contact
 from apps.admin_views import ad_team
 from apps.admin_views import ad_feedback
-from apps.admin_views import ad_faq, ad_editservice, ad_addservice
-
+from apps.admin_views import ad_faq, ad_editservice, ad_addservice ,delete_service
+from apps.admin_views import ad_addblog ,delete_blog, ad_editblog, ad_editcontact ,delete_contact, ad_addcontact , delete_team , ad_addteam, ad_editteam
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='index'),
@@ -54,15 +54,28 @@ urlpatterns = [
     path('admin_editproject/<int:id>/', admin_editproject_form, name='admin_editproject_form'),
 #admin services urls
     path('ad_service/',ad_service,name='ad_service'),
-    path('ad_editservice/',ad_editservice,name='ad_editservice'),
+    path('ad_editservice/<int:id>/',ad_editservice,name='ad_editservice'),
     path('ad_addservice',ad_addservice,name='ad_addservice'),
+    path('services/delete/<int:id>/', delete_service, name='delete_service'),
 
 #admin blog urls
     path('ad_blog/',ad_blog,name='ad_blog'),
+    path('ad_addblog/',ad_addblog,name='ad_addblog'),
+    path('blog/delete/<int:id>/',delete_blog , name='delete_blog'),
+    path('ad_editblog/<int:id>/',ad_editblog,name='ad_editblog'),
+
+
 #admin contact urls
     path('ad_contact/',ad_contact,name='ad_contact'),
+    path('ad_editcontact/<int:id>/',ad_editcontact,name='ad_editcontact'),
+    path('contact/delete/<int:id>/', delete_contact, name='delete_contact'),
+    path('ad_addcontact/',ad_addcontact,name='ad_addcontact'),
 #admin team urls
     path('ad_team/',ad_team,name='ad_team'),
+    path('team/delete/<int:id>/', delete_team, name='delete_team'),
+    path('ad_addteam/',ad_addteam,name='ad_addteam'),
+    path('ad_editteam/<int:id>/', ad_editteam, name='ad_editteam'),
+    
 #admin feedback urls
     path('ad_feedback/',ad_feedback,name='ad_feedback'),
 #admin faq urls

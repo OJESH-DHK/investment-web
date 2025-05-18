@@ -1,33 +1,37 @@
 {% extends "admin_base.html" %}
 
-{% block title %}Edit Project{% endblock %}
+{% block title %}Edit Contact{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h2>Edit Project</h2>
+  <h2>Edit Contact</h2>
 
-  <form method="POST" enctype="multipart/form-data">
+  <form method="POST">
     {% csrf_token %}
+
     <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input type="text" name="title" id="title" class="form-control" value="{{ project.title }}" required>
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" value="{{ contact.name }}" required>
     </div>
 
     <div class="mb-3">
-      <label for="content" class="form-label">Content</label>
-      <textarea name="content" id="content" class="form-control" rows="5" required>{{ project.content }}</textarea>
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" id="email" class="form-control" value="{{ contact.email }}" required>
     </div>
 
     <div class="mb-3">
-      <label for="image" class="form-label">Image</label><br>
-      {% if project.image %}
-      <img src="{{ project.image.url }}" alt="Project Image" width="200"><br><br>
-      {% endif %}
-      <input type="file" name="image" id="image" class="form-control">
+      <label for="subject" class="form-label">Subject</label>
+      <input type="text" name="subject" id="subject" class="form-control" value="{{ contact.subject }}" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Update Project</button>
-    <a href="#" class="btn btn-secondary">Cancel</a>
+    <div class="mb-3">
+      <label for="message" class="form-label">Message</label>
+      <textarea name="message" id="message" class="form-control" rows="5" required>{{ contact.message }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Contact</button>
+    <a href="{% url 'ad_contact' %}" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
 {% endblock %}
+

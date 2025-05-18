@@ -36,14 +36,14 @@
             <img src="{{ service.image.url }}" alt="Service Image" width="100">
           </td>
           <td>
-            <a href="{% url 'ad_editservice'%}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{% url 'ad_editservice' id=service.id %}" class="btn btn-sm btn-primary">Edit</a>
 
             <!-- Delete button triggers modal -->
             <button type="button" 
                     class="btn btn-sm btn-danger delete-btn" 
                     data-bs-toggle="modal" 
                     data-bs-target="#deleteModal" 
-                    data-id="#">
+                    data-id="{{ service.id }}">
               Delete
             </button>
           </td>
@@ -85,9 +85,9 @@
 
     deleteButtons.forEach(button => {
       button.addEventListener('click', function () {
-        const projectId = this.getAttribute('data-id');
+        const serviceId = this.getAttribute('data-id');
         // Use Django URL pattern with project ID dynamically
-        deleteForm.action = `/projects/delete/${projectId}/`;
+        deleteForm.action = `/services/delete/${serviceId}/`;
       });
     });
   });

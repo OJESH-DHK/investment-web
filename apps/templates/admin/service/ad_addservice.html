@@ -10,12 +10,15 @@
 
     <div class="mb-3">
       <label for="title" class="form-label">Service Title</label>
-      <input type="text" name="title" id="title" class="form-control" placeholder="Enter service title" value="{{ service.title|default_if_none:'' }}">
+      <input type="text" name="title" id="title" class="form-control"
+             placeholder="Enter service title"
+             value="{{ service.title|default_if_none:'' }}">
     </div>
 
     <div class="mb-3">
       <label for="content" class="form-label">Service Content</label>
-      <textarea name="content" id="content" rows="5" class="form-control" placeholder="Enter service content">{{ service.content|default_if_none:'' }}</textarea>
+      <textarea name="content" id="content" rows="5" class="form-control"
+                placeholder="Enter service content">{{ service.content|default_if_none:'' }}</textarea>
     </div>
 
     <div class="mb-3">
@@ -29,10 +32,10 @@
       {% endif %}
     </div>
 
-<a href="{% url 'ad_service' %}" class="btn btn-primary">
-  <i class="bi bi-plus-circle me-1"></i> Add Project
-</a>
-
+    <!-- ✅ SUBMIT BUTTON -->
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i> {{ action }} Add
+    </button>
 
     <a href="{% url 'ad_service' %}" class="btn btn-secondary">Cancel</a>
   </form>
