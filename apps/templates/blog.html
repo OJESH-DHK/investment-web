@@ -52,7 +52,9 @@
                             <div class="mb-4">
                                 <h4 class="text-primary mb-2">{{blog.title}}</h4>
                                 <div class="d-flex justify-content-between">
-                                    <p class="mb-0"><span class="text-dark fw-bold">On</span> {{created_at}}</p>
+                                    <p class="mb-0"><span class="text-dark fw-bold"> Created On</span> {{ blog.created_at|date:"F d, Y" }}</p>
+
+
                                     <p class="mb-0"><span class="text-dark fw-bold">By</span> {{blog.author}}</p>
                                 </div>
                             </div>
@@ -65,6 +67,9 @@
                             </div>
                             <div class="my-4">
                                 <a href="#" class="h4">{{blog.description}}</a>
+                            </div>
+                             <div class="my-4">
+                                <a href="#" class="h4">{{blog.content}}</a>
                             </div>
 
                         </div>

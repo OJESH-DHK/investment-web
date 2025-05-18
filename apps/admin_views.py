@@ -1,12 +1,11 @@
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
-
+from django.contrib.auth.decorators import login_required
 from .models import Projects, Services, BlogDetails, Contact ,Team , Testimonial,Faq
+from django.contrib.auth import authenticate, login, logout
 
 
-def admin_dashboard(request):
-    return render(request,'admin_dashboard.html')
-
+@login_required
 def admin_dashboard(request):
     context = {
         'total_projects': Projects.objects.count(),
@@ -449,6 +448,29 @@ def delete_faq(request, id):
         faq.delete()
     return redirect('ad_faq')
 
+
+def calc(request):
+    return render(request,'calc/calc.html')
+
+
+def admin_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_staff:
+            login(request, user)
+            return redirect('admin_dashboard')  # Change to your admin dashboard URL name
+        else:
+            return render(request, 'admin_login/admin_login.html', {'error': 'Invalid credentials or not authorized.'})
+    
+    return render(request, 'admin_login/admin_login.html')
+
+
+def admin_logout(request):
+    logout(request)
+    return redirect('index')
 
 
 

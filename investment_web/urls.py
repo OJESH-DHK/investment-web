@@ -32,7 +32,7 @@ from apps.admin_views import ad_team
 from apps.admin_views import ad_feedback
 from apps.admin_views import ad_faq, ad_editservice, ad_addservice ,delete_service
 from apps.admin_views import ad_addblog ,delete_blog, ad_editblog, ad_editcontact ,delete_contact, ad_addcontact , delete_team , ad_addteam, ad_editteam , delete_feedback
-from apps.admin_views import ad_addfeedback , ad_editfeedback , ad_addfaq ,ad_editfaq ,delete_faq
+from apps.admin_views import ad_addfeedback , ad_editfeedback , ad_addfaq ,ad_editfaq ,delete_faq , calc ,admin_login ,admin_logout
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='index'),
@@ -47,7 +47,7 @@ urlpatterns = [
     path("404/",fourzerofour,name='fourzerofour'),
 
     #admin urls
-    path('admin_dashboard/',admin_dashboard,name='admin_dashboard'),
+    path('dashboard/',admin_dashboard,name='admin_dashboard'),
 #admin project urls
     path('admin_editproject/', admin_editproject, name='admin_editproject'),
     path('admin_addproject/',admin_addproject,name='admin_addproject'),
@@ -87,7 +87,13 @@ urlpatterns = [
     path('ad_faq/',ad_faq,name='ad_faq'),
     path('ad_addfaq/',ad_addfaq,name='ad_addfaq'),
     path('ad_editfaq/<int:id>/', ad_editfaq, name='ad_editfaq'),
-    path('faq/delete/<int:id>/', delete_faq, name='delete_faq')
+    path('faq/delete/<int:id>/', delete_faq, name='delete_faq'),
+    path('calc/', calc, name='calc'),
+    path('admin-login/', admin_login, name='admin_login'),
+    path('logout/', admin_logout, name='logout'),
+
+
+
 
 
 
