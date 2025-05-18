@@ -31,7 +31,8 @@ from apps.admin_views import ad_contact
 from apps.admin_views import ad_team
 from apps.admin_views import ad_feedback
 from apps.admin_views import ad_faq, ad_editservice, ad_addservice ,delete_service
-from apps.admin_views import ad_addblog ,delete_blog, ad_editblog, ad_editcontact ,delete_contact, ad_addcontact , delete_team , ad_addteam, ad_editteam
+from apps.admin_views import ad_addblog ,delete_blog, ad_editblog, ad_editcontact ,delete_contact, ad_addcontact , delete_team , ad_addteam, ad_editteam , delete_feedback
+from apps.admin_views import ad_addfeedback , ad_editfeedback , ad_addfaq ,ad_editfaq ,delete_faq
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='index'),
@@ -78,8 +79,17 @@ urlpatterns = [
     
 #admin feedback urls
     path('ad_feedback/',ad_feedback,name='ad_feedback'),
+    path('delete_feedback/<int:id>/', delete_feedback, name='delete_feedback'),
+    path('ad_addfeedback/',ad_addfeedback,name='ad_addfeedback'),
+    path('ad_editfeedback/<int:id>/', ad_editfeedback, name='ad_editfeedback'),
+
 #admin faq urls
-    path('ad_faq/',ad_faq,name='ad_faq')
+    path('ad_faq/',ad_faq,name='ad_faq'),
+    path('ad_addfaq/',ad_addfaq,name='ad_addfaq'),
+    path('ad_editfaq/<int:id>/', ad_editfaq, name='ad_editfaq'),
+    path('faq/delete/<int:id>/', delete_faq, name='delete_faq')
+
+
 
 
 ]

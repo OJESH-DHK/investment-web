@@ -296,8 +296,6 @@ def ad_addteam(request):
         'action': 'Add',
         'team': {}
     })
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Team
 
 def ad_editteam(request, id):
     team = get_object_or_404(Team, id=id)
@@ -337,6 +335,66 @@ def ad_feedback(request):
     }
     return render(request,'admin/feedback/ad_feedback.html',context)
 
+
+def delete_feedback(request, id):
+    feedback = get_object_or_404(Testimonial, id=id)  # FIX: Use Testimonial
+    if request.method == 'POST':
+        feedback.delete()
+    return redirect('ad_feedback')
+
+
+
+def ad_addfeedback(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        position = request.POST.get('position')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+
+        if name and position and description and image:
+            Testimonial.objects.create(
+                name=name,
+                position=position,
+                description=description,
+                image=image
+            )
+            return redirect('ad_feedback')
+
+    return render(request, 'admin/feedback/ad_addfeedback.html', {
+        'action': 'Add',
+        'testimonial': {}
+    })
+
+
+
+def ad_editfeedback(request, id):
+    testimonial = get_object_or_404(Testimonial, id=id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        position = request.POST.get('position')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+
+        # Update fields
+        testimonial.name = name
+        testimonial.position = position
+        testimonial.description = description
+
+        if image:
+            testimonial.image = image  # Only update image if a new one is uploaded
+
+        testimonial.save()
+        return redirect('ad_feedback')  # Adjust if your feedback list view uses a different name
+
+    return render(request, 'admin/feedback/ad_editfeedback.html', {
+        'testimonial': testimonial,
+        'action': 'Edit'
+    })
+
+
+
+
 #admin faq
 def ad_faq(request):
     faqs = Faq.objects.all()
@@ -344,6 +402,54 @@ def ad_faq(request):
         'faqs': faqs,
     }
     return render(request,'admin/faq/ad_faq.html',context)
+
+def ad_addfaq(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        content = request.POST.get('content')
+
+        if title and description and content:
+            Faq.objects.create(
+                title=title,
+                description=description,
+                content=content
+            )
+            return redirect('ad_faq')  # Make sure this matches your URL name for listing FAQs
+
+    return render(request, 'admin/faq/ad_addfaq.html', {
+        'action': 'Add',
+        'faq': {}
+    })
+
+def ad_editfaq(request, id):
+    faq = get_object_or_404(Faq, id=id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        content = request.POST.get('content')
+
+        # Update fields
+        faq.title = title
+        faq.description = description
+        faq.content = content
+
+        faq.save()
+        return redirect('ad_faq')  # Adjust if your FAQ list view uses a different name
+
+    return render(request, 'admin/faq/ad_editfaq.html', {
+        'faq': faq,
+        'action': 'Edit'
+    })
+
+def delete_faq(request, id):
+    faq = get_object_or_404(Faq, id=id)
+    if request.method == 'POST':
+        faq.delete()
+    return redirect('ad_faq')
+
+
 
 
 

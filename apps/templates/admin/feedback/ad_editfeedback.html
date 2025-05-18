@@ -1,0 +1,46 @@
+{% extends "admin_base.html" %}
+
+{% block title %}{{ action }} Testimonial{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} Testimonial</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" value="{{ testimonial.name }}" required>
+    </div>
+
+    <!-- Position -->
+    <div class="mb-3">
+      <label for="position" class="form-label">Position</label>
+      <textarea name="position" id="position" class="form-control" rows="2" required>{{ testimonial.position }}</textarea>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" class="form-control" rows="4" required>{{ testimonial.description }}</textarea>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" name="image" id="image" class="form-control">
+      {% if testimonial.image %}
+        <div class="mt-2">
+          <img src="{{ testimonial.image.url }}" alt="Testimonial Image" width="150">
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">{{ action }} Testimonial</button>
+    <a href="{% url 'ad_feedback' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

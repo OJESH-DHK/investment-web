@@ -1,0 +1,39 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ action }} FAQ{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} FAQ</h2>
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" id="title" class="form-control"
+             placeholder="Enter title"
+             value="{{ faq.title|default:'' }}" required>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" rows="3" class="form-control"
+                placeholder="Enter description">{{ faq.description|default:'' }}</textarea>
+    </div>
+
+    <!-- Content -->
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <textarea name="content" id="content" rows="5" class="form-control"
+                placeholder="Enter detailed content">{{ faq.content|default:'' }}</textarea>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-save me-1"></i> {{ action }} FAQ
+    </button>
+    <a href="{% url 'ad_faq' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

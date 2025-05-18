@@ -1,0 +1,50 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ action }} Testimonial{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ action }} Testimonial</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control"
+             placeholder="Enter name"
+             value="{{ testimonial.name|default:'' }}">
+    </div>
+
+    <!-- Position -->
+    <div class="mb-3">
+      <label for="position" class="form-label">Position</label>
+      <textarea name="position" id="position" rows="2" class="form-control"
+                placeholder="Enter position">{{ testimonial.position|default:'' }}</textarea>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" rows="4" class="form-control"
+                placeholder="Enter description">{{ testimonial.description|default:'' }}</textarea>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" name="image" id="image" class="form-control">
+      {% if testimonial.image %}
+        <div class="mt-2">
+          <img src="{{ testimonial.image.url }}" alt="Testimonial Image" width="150">
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i> {{ action }} Testimonial
+    </button>
+    <a href="{% url 'ad_feedback' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
