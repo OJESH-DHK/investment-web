@@ -8,6 +8,7 @@ from .models import Team
 from .models import Testimonial
 from .models import Faq
 from .models import Contact
+from .models import Organization
 
 admin.site.register(Services)
 admin.site.register(Projects)
@@ -16,5 +17,6 @@ admin.site.register(Team)
 admin.site.register(Testimonial)
 admin.site.register(Faq)
 admin.site.register(Contact)
+admin.site.register(Organization)
 
 

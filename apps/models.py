@@ -63,9 +63,29 @@ class Contact(models.Model):
     email = models.EmailField()  # Corrected 'emaai' to 'EmailField'
     subject = models.CharField(max_length=200)  # Use CharField for the subject
     message = models.TextField()  # Use TextField for the message
+    
 
     def __str__(self):
         return self.name
+    
+class Organization(models.Model):
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=20)
+    gmail = models.EmailField()
+    
+    # Social media links
+    facebook = models.URLField(blank=True, null=True)
+    instagram = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null=True)
+    twitter = models.URLField(blank=True, null=True)
+
+    logo = models.ImageField(upload_to='org_logos/')
+
+    def __str__(self):
+        return self.name
+
+
 
 
 

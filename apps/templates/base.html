@@ -50,17 +50,17 @@
             <div class="row gx-0 align-items-center" style="height: 45px;">
                 <div class="col-lg-8 text-center text-lg-start mb-lg-0">
                     <div class="d-flex flex-wrap">
-                        <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Find A Location</a>
-                        <a href="#" class="text-muted me-4"><i class="fas fa-phone-alt text-primary me-2"></i>+01234567890</a>
-                        <a href="#" class="text-muted me-0"><i class="fas fa-envelope text-primary me-2"></i>Example@gmail.com</a>
+                        <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>{{ org.location }}</a>
+                        <a href="#" class="text-muted me-4"><i class="fas fa-phone-alt text-primary me-2"></i>{{ org.phone_number }}</a>
+                        <a href="#" class="text-muted me-0"><i class="fas fa-envelope text-primary me-2"></i>{{ org.gmail }}</a>
                     </div>
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-flex align-items-center justify-content-end">
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-facebook-f text-white"></i></a>
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-twitter text-white"></i></a>
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-instagram text-white"></i></a>
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i class="fab fa-linkedin-in text-white"></i></a>
+                        <a href="{{ org.facebook }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-facebook-f text-white"></i></a>
+                        <a href="{{ org.instagram }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-twitter text-white"></i></a>
+                        <a href="{{ org.linkedin }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-instagram text-white"></i></a>
+                        <a href="{{ org.twitter }}" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i class="fab fa-linkedin-in text-white"></i></a>
                     </div>
                 </div>
             </div>
@@ -69,46 +69,41 @@
     {% endblock %}
     <!-- Topbar End -->
 
-    {% block navbar %}  <!-- Allows custom content for the navbar -->
-    <div class="container-fluid sticky-top px-0">
-        <div class="position-absolute bg-dark" style="left: 0; top: 0; width: 100%; height: 100%;">
-        </div>
-        <div class="container px-0">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
-           <a href="{% url 'index' %}" class="navbar-brand p-0">
-                    <img src="{% static 'img/logo.png' %}" alt="Investa" height="90">
+{% block navbar %}
+<div class="container-fluid sticky-top px-0">
+    <div class="position-absolute bg-dark" style="left: 0; top: 0; width: 100%; height: 100%;">
+    </div>
+    <div class="container px-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
+            <a href="{% url 'index' %}" class="navbar-brand p-0">
+                <img src="{% static 'img/logo.png' %}" alt="Investa" height="90">
             </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-<div class="collapse navbar-collapse" id="navbarCollapse">
-    <div class="navbar-nav ms-auto py-0">
-        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
-        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-        <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
-        <a href="{% url 'projects' %}" class="nav-item nav-link">Project</a>
-        <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-            <div class="dropdown-menu m-0">
-                <a href="{% url 'blog' %}" class="dropdown-item">Our Blog</a>
-                <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonial</a>
-                <a href="{% url 'faq' %}" class="dropdown-item">FAQs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
+                    <a href="{% url 'projects' %}" class="nav-item nav-link">Project</a>
+                    <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
+                    <a href="{% url 'team' %}" class="nav-item nav-link">Team</a>
+                    <a href="{% url 'testimonials' %}" class="nav-item nav-link">Testimonial</a>
+                    <a href="{% url 'faq' %}" class="nav-item nav-link">FAQs</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                </div>
             </div>
-        </div>
-        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+
+            <div class="d-flex align-items-center flex-nowrap pt-xl-0">
+                <!-- Optional right side buttons -->
+            </div>
+        </nav>
     </div>
 </div>
+{% endblock %}
 
-                    <div class="d-flex align-items-center flex-nowrap pt-xl-0">
-
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    {% endblock %}
     <!-- Navbar End -->
 
     {% block content %}  <!-- Main content to be added by child templates -->
