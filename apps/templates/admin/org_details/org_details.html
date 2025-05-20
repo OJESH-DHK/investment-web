@@ -1,0 +1,58 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin Dashboard - Organization Details{% endblock %}
+
+{% block content %}
+<div class="container-fluid table-container">
+  <h2 class="mb-4">Admin Dashboard - Organization Details</h2>
+
+  {% if organization %}
+  <div class="card mb-4 shadow">
+    <div class="row g-0">
+      <div class="col-md-3 text-center p-3">
+        {% if organization.logo %}
+          <img src="{{ organization.logo.url }}" class="img-fluid rounded" alt="{{ organization.name }} Logo" style="max-height: 150px;">
+        {% else %}
+          <p>No Logo Uploaded</p>
+        {% endif %}
+      </div>
+      <div class="col-md-9">
+        <div class="card-body">
+          <h4 class="card-title">{{ organization.name }}</h4>
+          <p><strong>Location:</strong> {{ organization.location }}</p>
+          <p><strong>Phone:</strong> {{ organization.phone_number }}</p>
+          <p><strong>Email:</strong> {{ organization.gmail }}</p>
+          
+          <div>
+            <strong>Social Media:</strong>
+            <ul class="list-unstyled mb-0">
+              {% if organization.facebook %}
+                <li><i class="fab fa-facebook text-primary"></i> <a href="{{ organization.facebook }}" target="_blank">Facebook</a></li>
+              {% endif %}
+              {% if organization.instagram %}
+                <li><i class="fab fa-instagram text-danger"></i> <a href="{{ organization.instagram }}" target="_blank">Instagram</a></li>
+              {% endif %}
+              {% if organization.linkedin %}
+                <li><i class="fab fa-linkedin text-info"></i> <a href="{{ organization.linkedin }}" target="_blank">LinkedIn</a></li>
+              {% endif %}
+              {% if organization.twitter %}
+                <li><i class="fab fa-twitter text-primary"></i> <a href="{{ organization.twitter }}" target="_blank">Twitter</a></li>
+              {% endif %}
+              {% if not organization.facebook and not organization.instagram and not organization.linkedin and not organization.twitter %}
+                <li>No social media links available.</li>
+              {% endif %}
+            </ul>
+          </div>
+
+          <div class="mt-3">
+            <a href="{% url 'edit_organization' organization.id %}" class="btn btn-primary">Edit Organization</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <div class="alert alert-warning">No organization details found.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Edit Organization{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Edit Organization</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" value="{{ organization.name }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="location" class="form-label">Location</label>
+      <input type="text" name="location" id="location" class="form-control" value="{{ organization.location }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone_number" class="form-label">Phone Number</label>
+      <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ organization.phone_number }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="gmail" class="form-label">Email</label>
+      <input type="email" name="gmail" id="gmail" class="form-control" value="{{ organization.gmail }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="facebook" class="form-label">Facebook</label>
+      <input type="url" name="facebook" id="facebook" class="form-control" value="{{ organization.facebook }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="instagram" class="form-label">Instagram</label>
+      <input type="url" name="instagram" id="instagram" class="form-control" value="{{ organization.instagram }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="linkedin" class="form-label">LinkedIn</label>
+      <input type="url" name="linkedin" id="linkedin" class="form-control" value="{{ organization.linkedin }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="twitter" class="form-label">Twitter</label>
+      <input type="url" name="twitter" id="twitter" class="form-control" value="{{ organization.twitter }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="logo" class="form-label">Logo</label><br>
+      {% if organization.logo %}
+        <img src="{{ organization.logo.url }}" alt="Logo" style="height: 80px; margin-bottom: 10px;">
+      {% endif %}
+      <input type="file" name="logo" id="logo" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Organization</button>
+    <a href="{% url 'ad_org' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

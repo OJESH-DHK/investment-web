@@ -58,9 +58,9 @@
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-flex align-items-center justify-content-end">
                         <a href="{{ org.facebook }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-facebook-f text-white"></i></a>
-                        <a href="{{ org.instagram }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-twitter text-white"></i></a>
-                        <a href="{{ org.linkedin }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-instagram text-white"></i></a>
-                        <a href="{{ org.twitter }}" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i class="fab fa-linkedin-in text-white"></i></a>
+                        <a href="{{ org.twitter }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-twitter text-white"></i></a>
+                        <a href="{{ org.instagram }}" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-instagram text-white"></i></a>
+                        <a href="{{ org.linkedin }}" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i class="fab fa-linkedin-in text-white"></i></a>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,14 @@
                     <a href="{% url 'team' %}" class="nav-item nav-link">Team</a>
                     <a href="{% url 'testimonials' %}" class="nav-item nav-link">Testimonial</a>
                     <a href="{% url 'faq' %}" class="nav-item nav-link">FAQs</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tools</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="{% url 'calc' %}" class="dropdown-item">SIP Calculator</a>
+                    </div>
+                </div>
                     <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                    
                 </div>
             </div>
 

@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .models import Projects, Services, BlogDetails, Contact ,Team , Testimonial,Faq
 from django.contrib.auth import authenticate, login, logout
-
+from .models import Organization
 
 @login_required
 def admin_dashboard(request):
@@ -447,6 +447,43 @@ def delete_faq(request, id):
     if request.method == 'POST':
         faq.delete()
     return redirect('ad_faq')
+
+#org details 
+
+
+
+def ad_org(request):
+    organization = Organization.objects.first()  # Assuming there's only one organization record
+    context = {
+        'organization': organization,
+    }
+    return render(request, 'admin/org_details/org_details.html', context)  # Make sure this matches your actual template path
+
+
+def edit_organization(request, id):
+    organization = get_object_or_404(Organization, id=id)
+
+    if request.method == 'POST':
+        organization.name = request.POST.get('name')
+        organization.location = request.POST.get('location')
+        organization.phone_number = request.POST.get('phone_number')
+        organization.gmail = request.POST.get('gmail')
+        organization.facebook = request.POST.get('facebook')
+        organization.instagram = request.POST.get('instagram')
+        organization.linkedin = request.POST.get('linkedin')
+        organization.twitter = request.POST.get('twitter')
+        
+        if request.FILES.get('logo'):
+            organization.logo = request.FILES['logo']
+
+        organization.save()
+        return redirect('ad_org')  # Redirect to the organization listing page
+
+    context = {'organization': organization}
+    return render(request, 'admin/org_details/edit_organization.html', context)
+
+
+
 
 
 def calc(request):

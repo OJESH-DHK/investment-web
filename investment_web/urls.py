@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from apps.views import index,about,blog,contact,faq,projects,services,team,testimonials,fourzerofour
+from apps.views import index,about,blog,contact,faq,projects,services,team,testimonials,fourzerofour 
 from apps.admin_views import admin_dashboard
 
 from apps.admin_views import admin_editproject
@@ -32,7 +32,7 @@ from apps.admin_views import ad_team
 from apps.admin_views import ad_feedback
 from apps.admin_views import ad_faq, ad_editservice, ad_addservice ,delete_service
 from apps.admin_views import ad_addblog ,delete_blog, ad_editblog, ad_editcontact ,delete_contact, ad_addcontact , delete_team , ad_addteam, ad_editteam , delete_feedback
-from apps.admin_views import ad_addfeedback , ad_editfeedback , ad_addfaq ,ad_editfaq ,delete_faq , calc ,admin_login ,admin_logout
+from apps.admin_views import ad_addfeedback , ad_editfeedback , ad_addfaq ,ad_editfaq ,delete_faq , calc ,admin_login ,admin_logout, ad_org , edit_organization
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='index'),
@@ -91,6 +91,12 @@ urlpatterns = [
     path('calc/', calc, name='calc'),
     path('admin-login/', admin_login, name='admin_login'),
     path('logout/', admin_logout, name='logout'),
+
+#admin organization details 
+
+    path('ad_org/', ad_org, name='ad_org'),
+    path('organization/edit/<int:id>/', edit_organization, name='edit_organization'),
+
 
 
 
