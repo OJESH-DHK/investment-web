@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link rel="icon" type="image/png" href="{{ org.logo.url }}">
 
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
@@ -70,42 +71,49 @@
     <!-- Topbar End -->
 
 {% block navbar %}
+
+
 <div class="container-fluid sticky-top px-0">
     <div class="position-absolute bg-dark" style="left: 0; top: 0; width: 100%; height: 100%;">
     </div>
     <div class="container px-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
-            <a href="{% url 'index' %}" class="navbar-brand p-0">
-                <img src="{% static 'img/logo.png' %}" alt="Investa" height="90">
-            </a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-white py-2 px-4 align-items-center">
+            <!-- Logo -->
+          <div class="d-flex align-items-center p-2">
+  <img src="{{ org.logo.url }}" alt="Site Logo" class="img-fluid" style="height: 50px; margin-right: 10px;">
+</div>
+
+
+            <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
             </button>
 
-<div class="collapse navbar-collapse" id="navbarCollapse">
-    <div class="navbar-nav ms-auto py-0">
-        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
-        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-        <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
-        <a href="{% url 'projects' %}" class="nav-item nav-link">Projects</a>
-        <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
-        <a href="{% url 'team' %}" class="nav-item nav-link">Team</a>
-        <a href="{% url 'testimonials' %}" class="nav-item nav-link">Testimonials</a>
-        <a href="{% url 'faq' %}" class="nav-item nav-link">FAQs</a>
-        <a href="{% url 'calc' %}" class="nav-item nav-link">Grow High Investment Calculator</a>
-        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-    </div>
-</div>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
+                    <a href="{% url 'projects' %}" class="nav-item nav-link">Projects</a>
+                    <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
+                    <a href="{% url 'team' %}" class="nav-item nav-link">Team</a>
+                    <a href="{% url 'testimonials' %}" class="nav-item nav-link">Testimonials</a>
+                    <a href="{% url 'faq' %}" class="nav-item nav-link">FAQs</a>
+                    <a href="{% url 'calc' %}" class="nav-item nav-link">Investment Calculator</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                </div>
+            </div>
 
-
-
-            <div class="d-flex align-items-center flex-nowrap pt-xl-0">
-                <!-- Optional right side buttons -->
+            <!-- Optional right-side content -->
+            <div class="d-flex align-items-center flex-nowrap pt-xl-0 ms-3">
+                <!-- Add login buttons, icons, etc. here if needed -->
             </div>
         </nav>
     </div>
 </div>
 {% endblock %}
+
 
     <!-- Navbar End -->
 
@@ -117,16 +125,19 @@
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
     <div class="container py-5">
         <div class="row g-5">
+<!-- Contact Info with Logo -->
+<div class="col-md-6 col-lg-6 col-xl-3">
+    <div class="footer-item d-flex flex-column">
+        <!-- Logo Added Here -->
+        <a href="{% url 'index' %}" class="navbar-brand p-0 mb-3">
+            <img src="{{ org.logo.url }}" alt="Investa" height="90">
+        </a>
 
-            <!-- Logo & Organization Name -->
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column align-items-start">
-                    <a href="{% url 'index' %}" class="navbar-brand p-0 mb-3">
-                        <img src="{% static 'img/logo.png' %}" alt="Investa" height="90">
-                    </a>
-                    <h5 class="text-white">{{ org.name }}</h5>
-                </div>
-            </div>
+        <!-- Organization Name -->
+        <h5 class="text-white">{{ org.name }}</h5>
+    </div>
+</div>
+
 
             <!-- Quick Links -->
             <div class="col-md-6 col-lg-6 col-xl-3">
@@ -139,50 +150,52 @@
                 </div>
             </div>
 
-            <!-- Get In Touch -->
+            <!-- Get In Touch Repeated (keep if needed, or remove if duplicate) -->
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
                     <h4 class="text-white mb-4">Get In Touch</h4>
                     <p class="text-white mb-2"><i class="fa fa-map-marker-alt me-2"></i> {{ org.location }}</p>
-                    <p class="text-white mb-2"><i class="fa fa-phone-alt me-2"></i> {{ org.phone_number }}</p>
+                    <p class="text-white mb-2"><i class="fa fa-phone-alt me-2"></i> {{org.phone_number}}</p>
                     <p class="text-white mb-2"><i class="fa fa-envelope me-2"></i> {{ org.gmail|default:"info@example.com" }}</p>
-                </div>
-            </div>
 
-            <!-- Social Links -->
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="text-white mb-4">Follow Us</h4>
-                    <div class="pt-1 d-flex flex-column">
-                        {% if org and org.twitter %}
-                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.twitter }}">
-                                <i class="fab fa-twitter me-2"></i> Twitter
-                            </a>
-                        {% endif %}
-                        {% if org and org.facebook %}
-                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.facebook }}">
-                                <i class="fab fa-facebook-f me-2"></i> Facebook
-                            </a>
-                        {% endif %}
-                        {% if org and org.instagram %}
-                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.instagram }}">
-                                <i class="fab fa-instagram me-2"></i> Instagram
-                            </a>
-                        {% endif %}
-                        {% if org and org.linkedin %}
-                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.linkedin }}">
-                                <i class="fab fa-linkedin-in me-2"></i> LinkedIn
-                            </a>
-                        {% endif %}
-                    </div>
                 </div>
             </div>
+            
+
+<div class="col-md-6 col-lg-6 col-xl-3">
+    <div class="footer-item d-flex flex-column">
+        <h4 class="text-white mb-4">Follow Us</h4>
+        <div class="pt-2">
+            {% if org and org.twitter %}
+                <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.twitter }}">
+                    <i class="fab fa-twitter me-2"></i> Twitter
+                </a>
+            {% endif %}
+            {% if org and org.facebook %}
+                <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.facebook }}">
+                    <i class="fab fa-facebook-f me-2"></i> Facebook
+                </a>
+            {% endif %}
+            {% if org and org.instagram %}
+                <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.instagram }}">
+                    <i class="fab fa-instagram me-2"></i> Instagram
+                </a>
+            {% endif %}
+            {% if org and org.linkedin %}
+                <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.linkedin }}">
+                    <i class="fab fa-linkedin-in me-2"></i> LinkedIn
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
 
         </div>
     </div>
 </div>
 <!-- Footer End -->
-
 
     {% endblock %}
 
