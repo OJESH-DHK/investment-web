@@ -1,0 +1,21 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Edit Investment Setting{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Edit Investment Setting</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="return_rate" class="form-label">Return Rate (%)</label>
+      <input type="number" step="0.01" name="return_rate" id="return_rate" class="form-control" value="{{ investment.return_rate }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{% url 'ad_investment_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

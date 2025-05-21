@@ -1,71 +1,79 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Calc - Investa{% endblock %}
+{% block title %}Grow High Investment - Investa{% endblock %}
 {% block content %}
 
-    <div class="container-fluid bg-breadcrumb">
-        <div class="bg-breadcrumb-single"></div>
-        <div class="container text-center py-5" style="max-width: 900px;">
-            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">SIP Calculator</h4>
-            <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-primary">SIP Calculator</li>
-            </ol>
-        </div>
+<!-- Breadcrumb Section -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="bg-breadcrumb-single"></div>
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Grow High Investment</h4>
+        <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item active text-primary">Grow High Investment</li>
+        </ol>
     </div>
-    <div class="container my-5">
-        <div class="card shadow p-4">
-            <form id="sipForm">
-                <div class="mb-3">
-                    <label for="investmentAmount" class="form-label">Investment Amount (Rs.)</label>
-                    <input type="number" class="form-control" id="investmentAmount" required>
-                </div>
-                <div class="mb-3">
-                    <label for="investmentPeriod" class="form-label">Investment Period (Years)</label>
-                    <input type="number" class="form-control" id="investmentPeriod" required>
-                </div>
-                <div class="mb-3">
-                    <label for="expectedReturnRate" class="form-label">Expected Annual Return (%)</label>
-                    <input type="number" class="form-control" id="expectedReturnRate" step="0.1" required>
-                </div>
-                <div class="mb-3">
-                    <label for="frequency" class="form-label">Investment Frequency</label>
-                    <select class="form-select" id="frequency" required>
-                        <option value="12">Monthly</option>
-                        <option value="4">Quarterly</option>
-                        <option value="2">Semi-Annually</option>
-                        <option value="1">Annually</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Calculate</button>
-            </form>
-            <div id="result" class="result-box d-none">
-                <h5>Results:</h5>
-                <p><strong>Total Invested Amount:</strong> Rs. <span id="investedAmount"></span></p>
-                <p><strong>Estimated Return:</strong> Rs. <span id="returnAmount"></span></p>
-                <p><strong>Maturity Amount:</strong> Rs. <span id="maturityAmount"></span></p>
+</div>
+
+<!-- Calculator Form -->
+<div class="container my-5">
+    <div class="card shadow p-4">
+        <form id="sipForm">
+            <div class="mb-3">
+                <label for="investmentAmount" class="form-label">Investment Amount (Rs.)</label>
+                <input type="number" class="form-control" id="investmentAmount" required>
             </div>
+            <div class="mb-3">
+                <label for="investmentPeriod" class="form-label">Investment Period (Years)</label>
+                <input type="number" class="form-control" id="investmentPeriod" required>
+            </div>
+            <div class="mb-3">
+                <label for="expectedReturnRate" class="form-label">Return Rate (%)</label>
+                <input type="number" class="form-control" id="expectedReturnRate" value="{{ return_rate }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="frequency" class="form-label">Investment Frequency</label>
+                <select class="form-select" id="frequency" required>
+                    <option value="12">Monthly</option>
+                    <option value="4">Quarterly</option>
+                    <option value="2">Semi-Annually</option>
+                    <option value="1">Annually</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Calculate</button>
+        </form>
+
+        <!-- Results -->
+        <div id="result" class="result-box d-none mt-4">
+            <h5>Results:</h5>
+            <p><strong>Total Invested Amount:</strong> Rs. <span id="investedAmount"></span></p>
+            <p><strong>Estimated Return:</strong> Rs. <span id="returnAmount"></span></p>
+            <p><strong>Maturity Amount:</strong> Rs. <span id="maturityAmount"></span></p>
         </div>
     </div>
-    <script>
-        document.getElementById("sipForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const P = parseFloat(document.getElementById("investmentAmount").value);
-            const years = parseFloat(document.getElementById("investmentPeriod").value);
-            const annualRate = parseFloat(document.getElementById("expectedReturnRate").value);
-            const frequency = parseInt(document.getElementById("frequency").value);
-            const n = years * frequency; // total number of installments
-            const r = annualRate / frequency / 100; // periodic interest rate
-            // SIP formula: FV = P × [ ( (1 + r)^n - 1 ) × (1 + r) ] / r
-            const maturityValue = P * (((Math.pow(1 + r, n) - 1) * (1 + r)) / r);
-            const investedAmount = P * n;
-            const returnAmount = maturityValue - investedAmount;
-            document.getElementById("investedAmount").textContent = investedAmount.toFixed(2);
-            document.getElementById("returnAmount").textContent = returnAmount.toFixed(2);
-            document.getElementById("maturityAmount").textContent = maturityValue.toFixed(2);
-            document.getElementById("result").classList.remove("d-none");
-        });
-    </script>
+</div>
+
+<!-- JavaScript Calculation -->
+<script>
+    document.getElementById("sipForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const P = parseFloat(document.getElementById("investmentAmount").value);
+        const years = parseFloat(document.getElementById("investmentPeriod").value);
+        const annualRate = parseFloat(document.getElementById("expectedReturnRate").value);
+        const frequency = parseInt(document.getElementById("frequency").value);
+        const n = years * frequency; // total installments
+        const r = annualRate / frequency / 100; // periodic rate
+
+        const maturityValue = P * (((Math.pow(1 + r, n) - 1) * (1 + r)) / r);
+        const investedAmount = P * n;
+        const returnAmount = maturityValue - investedAmount;
+
+        document.getElementById("investedAmount").textContent = investedAmount.toFixed(2);
+        document.getElementById("returnAmount").textContent = returnAmount.toFixed(2);
+        document.getElementById("maturityAmount").textContent = maturityValue.toFixed(2);
+        document.getElementById("result").classList.remove("d-none");
+    });
+</script>
 
 {% endblock %}

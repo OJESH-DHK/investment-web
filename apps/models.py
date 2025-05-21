@@ -85,6 +85,17 @@ class Organization(models.Model):
     def __str__(self):
         return self.name
 
+# models.py
+from django.db import models
+
+class InvestmentSetting(models.Model):
+    return_rate = models.FloatField(default=10.0, help_text="Return rate in percentage (e.g., 10 for 10%)")
+
+    def __str__(self):
+        return f"Return Rate: {self.return_rate}%"
+
+
+
 
 
 

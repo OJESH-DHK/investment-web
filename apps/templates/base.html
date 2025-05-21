@@ -82,26 +82,22 @@
                 <span class="fa fa-bars"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
-                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                    <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
-                    <a href="{% url 'projects' %}" class="nav-item nav-link">Project</a>
-                    <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
-                    <a href="{% url 'team' %}" class="nav-item nav-link">Team</a>
-                    <a href="{% url 'testimonials' %}" class="nav-item nav-link">Testimonial</a>
-                    <a href="{% url 'faq' %}" class="nav-item nav-link">FAQs</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tools</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="{% url 'calc' %}" class="dropdown-item">SIP Calculator</a>
-                    </div>
-                </div>
-                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                    
-                </div>
-            </div>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto py-0">
+        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+        <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
+        <a href="{% url 'projects' %}" class="nav-item nav-link">Projects</a>
+        <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
+        <a href="{% url 'team' %}" class="nav-item nav-link">Team</a>
+        <a href="{% url 'testimonials' %}" class="nav-item nav-link">Testimonials</a>
+        <a href="{% url 'faq' %}" class="nav-item nav-link">FAQs</a>
+        <a href="{% url 'calc' %}" class="nav-item nav-link">Grow High Investment Calculator</a>
+        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+    </div>
+</div>
+
+
 
             <div class="d-flex align-items-center flex-nowrap pt-xl-0">
                 <!-- Optional right side buttons -->
@@ -117,32 +113,77 @@
     {% endblock %}
 
     {% block footer %}  <!-- Footer block -->
-    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-md-6 col-lg-6 col-xl-3">
-                    <div class="footer-item d-flex flex-column">
-                        <h4 class="text-white mb-4">Newsletter</h4>
-                        <p class="mb-3">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
+<!-- Footer Start -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container py-5">
+        <div class="row g-5">
 
-                    </div>
+            <!-- Logo & Organization Name -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column align-items-start">
+                    <a href="{% url 'index' %}" class="navbar-brand p-0 mb-3">
+                        <img src="{% static 'img/logo.png' %}" alt="Investa" height="90">
+                    </a>
+                    <h5 class="text-white">{{ org.name }}</h5>
                 </div>
-                <div class="col-md-6 col-lg-6 col-xl-3">
-                    <div class="footer-item d-flex flex-column">
-                        <h4 class="text-white mb-4">Explore</h4>
-    <a href="{% url 'index' %}"><i class="fas fa-angle-right me-2"></i> Home</a>
-    <a href="{% url 'services' %}"><i class="fas fa-angle-right me-2"></i> Services</a>
-    <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
-    <a href="{% url 'projects' %}"><i class="fas fa-angle-right me-2"></i> Latest Projects</a>
-    <a href="{% url 'testimonials' %}"><i class="fas fa-angle-right me-2"></i> Testimonial</a>
-    <a href="{% url 'team' %}"><i class="fas fa-angle-right me-2"></i> Our Team</a>
-    <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
-                    </div>
-                </div>
-                <!-- Add more footer sections here -->
             </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="text-white mb-4">Quick Links</h4>
+                    <a class="text-white mb-2" href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                    <a class="text-white mb-2" href="{% url 'services' %}"><i class="fas fa-angle-right me-2"></i> Our Services</a>
+                    <a class="text-white mb-2" href="{% url 'blog' %}"><i class="fas fa-angle-right me-2"></i> Latest Blog</a>
+                    <a class="text-white mb-2" href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                </div>
+            </div>
+
+            <!-- Get In Touch -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="text-white mb-4">Get In Touch</h4>
+                    <p class="text-white mb-2"><i class="fa fa-map-marker-alt me-2"></i> {{ org.location }}</p>
+                    <p class="text-white mb-2"><i class="fa fa-phone-alt me-2"></i> {{ org.phone_number }}</p>
+                    <p class="text-white mb-2"><i class="fa fa-envelope me-2"></i> {{ org.gmail|default:"info@example.com" }}</p>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="text-white mb-4">Follow Us</h4>
+                    <div class="pt-1 d-flex flex-column">
+                        {% if org and org.twitter %}
+                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.twitter }}">
+                                <i class="fab fa-twitter me-2"></i> Twitter
+                            </a>
+                        {% endif %}
+                        {% if org and org.facebook %}
+                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.facebook }}">
+                                <i class="fab fa-facebook-f me-2"></i> Facebook
+                            </a>
+                        {% endif %}
+                        {% if org and org.instagram %}
+                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.instagram }}">
+                                <i class="fab fa-instagram me-2"></i> Instagram
+                            </a>
+                        {% endif %}
+                        {% if org and org.linkedin %}
+                            <a class="btn btn-light d-flex align-items-center mb-2" href="{{ org.linkedin }}">
+                                <i class="fab fa-linkedin-in me-2"></i> LinkedIn
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
+<!-- Footer End -->
+
+
     {% endblock %}
 
     <!-- Copyright Start -->
@@ -150,10 +191,10 @@
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-md-6 text-center text-md-start mb-md-0">
-                    <span class="text-body"><a href="#" class="border-bottom text-primary"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                    <span class="text-body"><a  class="border-bottom text-primary"><i class="fas fa-copyright text-light me-2"></i>{{org.name}}</a></span>
                 </div>
                 <div class="col-md-6 text-center text-md-end text-body">
-                    Designed By <a class="border-bottom text-primary" href="https://www.kitwosd.com/">Kitwosd IT Support Center near NMB Bank, Lalitpur 44700</a>
+                    Designed By <a class="border-bottom text-primary" href="https://www.kitwosd.com/">Kitwosd IT Support Center </a>
                 </div>
             </div>
         </div>

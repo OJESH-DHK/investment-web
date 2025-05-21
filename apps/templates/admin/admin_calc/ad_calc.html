@@ -1,0 +1,82 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin Dashboard - Investment Settings{% endblock %}
+
+{% block content %}
+<div class="container-fluid table-container">
+  <h2 class="mb-4">Admin Dashboard - Investment Settings</h2>
+
+  <div class="row">
+    <div class="col-md-9"></div>
+
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Return Rate (%)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for setting in investment_settings %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ setting.return_rate }}%</td>
+          <td>
+            <a href="{% url 'ad_edit_investment' setting.id %}" class="btn btn-sm btn-primary">Edit</a>
+
+
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="text-center">No investment settings found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this investment setting?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form id="deleteForm" method="POST" action="">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    const deleteForm = document.getElementById('deleteForm');
+
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        const settingId = this.getAttribute('data-id');
+        // Set the delete URL dynamically (adjust if needed)
+        deleteForm.action = `/investmentsetting/delete/${settingId}/`;
+      });
+    });
+  });
+</script>
+{% endblock %}

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Projects, Services, BlogDetails, Contact ,Team , Testimonial,Faq
 from django.contrib.auth import authenticate, login, logout
 from .models import Organization
+from .models import InvestmentSetting
 
 @login_required
 def admin_dashboard(request):
@@ -487,7 +488,11 @@ def edit_organization(request, id):
 
 
 def calc(request):
-    return render(request,'calc/calc.html')
+    setting = InvestmentSetting.objects.first()
+    return_rate = setting.return_rate if setting else 10.0
+    return render(request,'calc/calc.html', {'return_rate': return_rate})
+
+
 
 
 def admin_login(request):
@@ -508,6 +513,36 @@ def admin_login(request):
 def admin_logout(request):
     logout(request)
     return redirect('index')
+
+#admin calc
+def ad_investment_list(request):
+    investment_settings = InvestmentSetting.objects.all()
+    return render(request, 'admin/admin_calc/ad_calc.html', {'investment_settings': investment_settings})
+
+
+
+
+
+
+# Edit existing investment setting
+def ad_edit_investment(request, id):
+    investment = get_object_or_404(InvestmentSetting, id=id)
+
+    if request.method == "POST":
+        return_rate = request.POST.get('return_rate')
+        if return_rate:
+            investment.return_rate = float(return_rate)
+            investment.save()
+            return redirect('ad_investment_list')
+
+    return render(request, 'admin/admin_calc/ad_editcalc.html', {
+        'investment': investment,
+        'action': 'Edit'
+    })
+
+
+
+
 
 
 
