@@ -31,8 +31,8 @@ from apps.admin_views import ad_contact
 from apps.admin_views import ad_team
 from apps.admin_views import ad_feedback
 from apps.admin_views import ad_faq, ad_editservice, ad_addservice ,delete_service
-from apps.admin_views import ad_addblog ,delete_blog, ad_editblog, ad_editcontact ,delete_contact, ad_addcontact , delete_team , ad_addteam, ad_editteam , delete_feedback
-from apps.admin_views import ad_addfeedback , ad_editfeedback , ad_addfaq ,ad_editfaq ,delete_faq , calc ,admin_login ,admin_logout, ad_org , edit_organization , ad_investment_list , ad_edit_investment
+from apps.admin_views import ad_addblog ,delete_blog, ad_editblog, ad_editcontact ,delete_contact, ad_addcontact , delete_team , ad_addteam, ad_editteam , delete_feedback , ad_slider ,ad_deleteslider , ad_editslider
+from apps.admin_views import ad_addfeedback , ad_editfeedback , ad_addfaq ,ad_editfaq ,delete_faq , calc ,admin_login ,admin_logout, ad_org , edit_organization , ad_investment_list , ad_edit_investment , ad_addslider
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='index'),
@@ -102,6 +102,13 @@ urlpatterns = [
 
     path('ad_investment_list/', ad_investment_list, name='ad_investment_list'),
     path('ad_edit_investment/<int:id>/', ad_edit_investment, name='ad_edit_investment'),
+
+#for sliders 
+    path('ad_slider/', ad_slider, name='ad_slider'),
+    path('slider/delete/<int:id>/', ad_deleteslider, name='ad_deleteslider'),
+    path('slider/add/', ad_addslider, name='ad_addslider'),  
+    path('slider/edit/<int:id>/', ad_editslider, name='ad_editslider'),
+
 
 
 

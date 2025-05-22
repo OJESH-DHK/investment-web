@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Services
 from .models import Projects
 from .models import BlogDetails
+from .models import Slider
 from .models import Team
 from .models import Testimonial
 from .models import Faq
@@ -58,6 +59,7 @@ def index(request):
     teams = Team.objects.all()
     testimonials = Testimonial.objects.all()
     faqs = Faq.objects.all()
+    sliders = Slider.objects.all()
     context = {
         'services': services,
         'projects': projects,
@@ -65,6 +67,7 @@ def index(request):
         'teams' : teams,
         'testimonials' : testimonials,
         'faqs': faqs,
+        'sliders': sliders,
     }
     return render(request, 'index.html', context)
 
@@ -108,6 +111,8 @@ def testimonials(request):
 
 def fourzerofour(request):
     return render(request,'404.html')
+
+
 
 
 

@@ -10,6 +10,7 @@ from .models import Faq
 from .models import Contact
 from .models import Organization
 from .models import InvestmentSetting
+from .models import Slider
 
 admin.site.register(Services)
 admin.site.register(Projects)
@@ -20,6 +21,8 @@ admin.site.register(Faq)
 admin.site.register(Contact)
 admin.site.register(Organization)
 admin.site.register(InvestmentSetting)
+admin.site.register(Slider)
+
 
 
 

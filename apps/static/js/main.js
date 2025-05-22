@@ -30,21 +30,32 @@
     });
 
 
-    // Hero Header carousel
-    $(".header-carousel").owlCarousel({
-        items: 1,
-        autoplay: true,
-        smartSpeed: 2000,
-        center: false,
-        dots: false,
-        loop: true,
-        margin: 0,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ]
-    });
+$(".header-carousel").owlCarousel({
+    items: 1,
+    autoplay: true,
+    smartSpeed: 2000,
+    center: false,
+    dots: false,
+    loop: true,
+    margin: 0,
+    nav : true,
+    navText : [
+        '<i class="bi bi-arrow-left"></i>',
+        '<i class="bi bi-arrow-right"></i>'
+    ],
+    responsive: {
+        0: {
+            items: 1,
+            nav: false, // Hide arrows on mobile if needed
+            dots: true  // You can enable dots instead for mobile
+        },
+        768: {
+            items: 1,
+            nav: true
+        }
+    }
+});
+
 
 
 

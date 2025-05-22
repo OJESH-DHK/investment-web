@@ -1,0 +1,37 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Edit Slider{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Edit Slider</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!-- Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" id="title" class="form-control" value="{{ slider.title }}" required>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" class="form-control" rows="4" required>{{ slider.description }}</textarea>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label><br>
+      {% if slider.image %}
+        <img src="{{ slider.image.url }}" alt="Slider Image" width="200"><br><br>
+      {% endif %}
+      <input type="file" name="image" id="image" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Slider</button>
+    <a href="{% url 'ad_slider' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

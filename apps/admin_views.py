@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Projects, Services, BlogDetails, Contact ,Team , Testimonial,Faq
 from django.contrib.auth import authenticate, login, logout
 from .models import Organization
-from .models import InvestmentSetting
+from .models import InvestmentSetting ,Slider
 
 @login_required
 def admin_dashboard(request):
@@ -539,6 +539,50 @@ def ad_edit_investment(request, id):
         'investment': investment,
         'action': 'Edit'
     })
+
+#slider 
+
+def ad_slider(request):
+    sliders = Slider.objects.all()
+    context = {
+        'sliders': sliders,
+    }
+    return render(request, 'admin/slider/ad_slider.html', context)
+
+def ad_deleteslider(request, id):
+    slider = get_object_or_404(Slider, id=id)
+    if request.method == 'POST':
+        slider.delete()
+        return redirect('ad_slider')
+    return redirect('ad_slider')
+
+def ad_addslider(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+        Slider.objects.create(title=title, description=description, image=image)
+        return redirect('ad_slider')
+    
+    return render(request, 'admin/slider/ad_slider_form.html', {'action': 'Add', 'slider': {}})
+
+
+def ad_editslider(request, id):
+    slider = get_object_or_404(Slider, id=id)
+
+    if request.method == 'POST':
+        slider.title = request.POST.get('title')
+        slider.description = request.POST.get('description')
+        if request.FILES.get('image'):
+            slider.image = request.FILES.get('image')
+        slider.save()
+        return redirect('ad_slider')
+
+    return render(request, 'admin/slider/edit_slider.html', {'slider': slider})
+
+
+
+
 
 
 
