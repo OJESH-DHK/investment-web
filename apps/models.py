@@ -103,6 +103,26 @@ class Slider(models.Model):
         return self.title
 
 
+class About(models.Model):
+    image = models.ImageField(upload_to='about/')
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    
+    total_users = models.PositiveIntegerField()
+    projects_completed = models.PositiveIntegerField()
+    years_experience = models.PositiveIntegerField()
+    team_members = models.PositiveIntegerField()
+    
+    agenda_1 = models.CharField(max_length=255)
+    agenda_2 = models.CharField(max_length=255)
+    agenda_3 = models.CharField(max_length=255)
+    agenda_4 = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
+
 
 
 

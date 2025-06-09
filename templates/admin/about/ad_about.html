@@ -1,0 +1,68 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin Dashboard - About{% endblock %}
+
+{% block content %}
+<div class="container-fluid table-container">
+  <h2 class="mb-4">Admin Dashboard - About</h2>
+
+  <!-- Add About Button -->
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3 text-end mb-2">
+    </div>
+  </div>
+
+  <!-- About Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Total Users</th>
+          <th>Projects Completed</th>
+          <th>Years Experience</th>
+          <th>Team Members</th>
+          <th>Agendas</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ about.title }}</td>
+          <td>{{ about.description|truncatewords:20 }}</td>
+          <td>
+            <img src="{{ about.image.url }}" alt="About Image" width="100">
+          </td>
+          <td>{{ about.total_users }}</td>
+          <td>{{ about.projects_completed }}</td>
+          <td>{{ about.years_experience }}</td>
+          <td>{{ about.team_members }}</td>
+          <td>
+            <ul class="mb-0">
+              <li>{{ about.agenda_1 }}</li>
+              <li>{{ about.agenda_2 }}</li>
+              <li>{{ about.agenda_3 }}</li>
+              <li>{{ about.agenda_4 }}</li>
+            </ul>
+          </td>
+          <td>
+            <a href="{% url 'edit_about' about.id %}" class="btn btn-sm btn-primary">Edit</a>
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

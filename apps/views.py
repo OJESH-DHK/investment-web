@@ -5,7 +5,7 @@ from .models import BlogDetails
 from .models import Slider
 from .models import Team
 from .models import Testimonial
-from .models import Faq
+from .models import Faq, About
 from .forms import ContactForm
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -15,9 +15,11 @@ from django.shortcuts import redirect
 # Create your views here.
 def about(request):
     teams = Team.objects.all()
+    about = About.objects.first()
     context = {
 
         'teams' : teams,
+        'about': about,
     }
     return render(request, 'about.html', context)
 
@@ -60,6 +62,7 @@ def index(request):
     testimonials = Testimonial.objects.all()
     faqs = Faq.objects.all()
     sliders = Slider.objects.all()
+    about = About.objects.first()
     context = {
         'services': services,
         'projects': projects,
@@ -68,6 +71,7 @@ def index(request):
         'testimonials' : testimonials,
         'faqs': faqs,
         'sliders': sliders,
+        'about': about,
     }
     return render(request, 'index.html', context)
 

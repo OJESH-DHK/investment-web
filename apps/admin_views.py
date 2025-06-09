@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Projects, Services, BlogDetails, Contact ,Team , Testimonial,Faq
 from django.contrib.auth import authenticate, login, logout
 from .models import Organization
-from .models import InvestmentSetting ,Slider
+from .models import InvestmentSetting ,Slider, About
 
 @login_required
 def admin_dashboard(request):
@@ -579,6 +579,39 @@ def ad_editslider(request, id):
         return redirect('ad_slider')
 
     return render(request, 'admin/slider/edit_slider.html', {'slider': slider})
+
+
+def ad_about(request):
+    about = About.objects.first()
+    context = {
+        'about': about,
+    }
+    return render(request,'admin/about/ad_about.html', context)
+
+
+def edit_about(request, id):
+    about = get_object_or_404(About, id=id)
+
+    if request.method == "POST":
+        about.title = request.POST.get("title")
+        about.description = request.POST.get("description")
+        about.total_users = request.POST.get("total_users")
+        about.projects_completed = request.POST.get("projects_completed")
+        about.years_experience = request.POST.get("years_experience")
+        about.team_members = request.POST.get("team_members")
+        about.agenda_1 = request.POST.get("agenda_1")
+        about.agenda_2 = request.POST.get("agenda_2")
+        about.agenda_3 = request.POST.get("agenda_3")
+        about.agenda_4 = request.POST.get("agenda_4")
+
+        if request.FILES.get("image"):
+            about.image = request.FILES["image"]
+
+        about.save()
+        return redirect('ad_about')  # Adjust this name if your URL name is different
+
+    return render(request, 'admin/about/ad_edit_about.html', {'about': about})
+
 
 
 

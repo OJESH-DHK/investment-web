@@ -1,0 +1,61 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Edit About{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Edit About</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" id="title" class="form-control" value="{{ about.title }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" class="form-control" rows="5" required>{{ about.description }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label><br>
+      {% if about.image %}
+        <img src="{{ about.image.url }}" alt="About Image" width="200"><br><br>
+      {% endif %}
+      <input type="file" name="image" id="image" class="form-control">
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <label for="total_users">Total Users</label>
+        <input type="number" name="total_users" id="total_users" class="form-control" value="{{ about.total_users }}" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="projects_completed">Projects Completed</label>
+        <input type="number" name="projects_completed" id="projects_completed" class="form-control" value="{{ about.projects_completed }}" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="years_experience">Years Experience</label>
+        <input type="number" name="years_experience" id="years_experience" class="form-control" value="{{ about.years_experience }}" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="team_members">Team Members</label>
+        <input type="number" name="team_members" id="team_members" class="form-control" value="{{ about.team_members }}" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Agendas</label>
+      <input type="text" name="agenda_1" class="form-control mb-2" value="{{ about.agenda_1 }}" required>
+      <input type="text" name="agenda_2" class="form-control mb-2" value="{{ about.agenda_2 }}" required>
+      <input type="text" name="agenda_3" class="form-control mb-2" value="{{ about.agenda_3 }}" required>
+      <input type="text" name="agenda_4" class="form-control" value="{{ about.agenda_4 }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update About</button>
+    <a href="{% url 'ad_about' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
