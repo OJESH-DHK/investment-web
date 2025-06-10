@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ service.title }} - Investa{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <!-- Title -->
+            <h1 class="display-5 fw-bold text-primary mb-4">{{ service.title }}</h1>
+
+            <!-- Image -->
+            <div class="mb-4">
+                <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover; width: 100%;">
+            </div>
+
+            <!-- Description -->
+            <p class="lead text-muted" style="font-size: 18px; line-height: 1.8;">
+                {{ service.content }}
+            </p>
+
+          
+        </div>
+    </div>
+</div>
+{% endblock %}

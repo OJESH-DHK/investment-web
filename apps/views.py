@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
 from .models import Services
 from .models import Projects
 from .models import BlogDetails
@@ -96,6 +97,10 @@ def services(request):
         'faqs': faqs,
     }
     return render(request, 'service.html', context)
+
+def service_detail(request, id):
+    service = get_object_or_404(Services, id=id)
+    return render(request, 'service_detail.html', {'service': service})
 
 def team(request):
     teams = Team.objects.all()

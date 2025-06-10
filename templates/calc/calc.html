@@ -30,7 +30,7 @@
             </div>
             <div class="mb-3">
                 <label for="expectedReturnRate" class="form-label">Return Rate (%)</label>
-                <input type="number" class="form-control" id="expectedReturnRate" value="{{ return_rate }}" readonly>
+                <input type="number" class="form-control" id="expectedReturnRate" value="12" required>
             </div>
             <div class="mb-3">
                 <label for="frequency" class="form-label">Investment Frequency</label>
@@ -62,6 +62,7 @@
         const years = parseFloat(document.getElementById("investmentPeriod").value);
         const annualRate = parseFloat(document.getElementById("expectedReturnRate").value);
         const frequency = parseInt(document.getElementById("frequency").value);
+
         const n = years * frequency; // total installments
         const r = annualRate / frequency / 100; // periodic rate
 

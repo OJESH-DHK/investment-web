@@ -1,7 +1,7 @@
 # apps/urls.py
 
 from django.urls import path
-from .views import index, about, blog, contact, faq, projects, services, team, testimonials, fourzerofour 
+from .views import index, about, blog, contact, faq, projects, services, team, testimonials, fourzerofour, service_detail
 from .admin_views import (
     admin_dashboard, admin_editproject, admin_addproject, delete_project, admin_editproject_form,
     ad_service, ad_blog, ad_contact, ad_team, ad_feedback, ad_faq, ad_editservice, ad_addservice, delete_service,
@@ -77,6 +77,9 @@ urlpatterns = [
 
     path('ad_about/',ad_about, name='ad_about'),
     path('about/edit/<int:id>/', edit_about, name='edit_about'),
+
+
+    path('services/<int:id>/', service_detail, name='service_detail'), 
 
     
     
