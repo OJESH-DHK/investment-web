@@ -301,7 +301,8 @@
                         <p class="title-truncate">{{ project.title }}</p>
                         <p class="content-truncate">{{ project.content }}</p>
                     </div>
-                    <a class="btn btn-light btn-read-more" href="{% url 'projects' %}">Read More</a>
+                    <a class="btn btn-light btn-read-more" href="{% url 'project_detail' project.id %}">Read More</a>
+
                 </div>
             </div>
             {% endfor %}
@@ -316,14 +317,18 @@
 <!-- Blog Start -->
 <div class="container-fluid blog pb-5">
     <div class="container pb-5">
+        <!-- Section Heading -->
         <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
             <h4 class="text-primary">Our Blogs</h4>
             <h1 class="display-4">Latest Articles & News from the Blogs</h1>
         </div>
+
+        <!-- Blog Cards -->
         <div class="row g-4 justify-content-center">
             {% for blog in blogs %}
             <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp d-flex" data-wow-delay="0.1s">
                 <div class="blog-item bg-light rounded p-4 flex-fill d-flex flex-column" style="background-image: url(img/bg.png);">
+                    <!-- Title and Meta -->
                     <div class="mb-4">
                         <h4 class="text-primary mb-2">{{ blog.title }}</h4>
                         <div class="d-flex justify-content-between">
@@ -331,25 +336,38 @@
                             <p class="mb-0"><span class="text-dark fw-bold">By</span> {{ blog.author }}</p>
                         </div>
                     </div>
-                    <div class="project-img">
-                        <img src="{{ blog.image.url }}" class="img-fluid w-100 rounded" alt="Image">
-                        <div class="blog-plus-icon">
+
+                    <!-- Blog Image -->
+                    <div class="project-img mb-3 position-relative">
+                        <img src="{{ blog.image.url }}" class="img-fluid w-100 rounded" alt="Image" style="max-height: 200px; object-fit: cover;">
+                        <div class="blog-plus-icon position-absolute top-0 end-0 m-2">
                             <a href="{{ blog.image.url }}" data-lightbox="blog-1" class="btn btn-primary btn-md-square rounded-pill">
                                 <i class="fas fa-plus fa-1x"></i>
                             </a>
                         </div>
                     </div>
-                    <div class="my-4 flex-grow-1">
-                        <a href="#" class="h4">{{ blog.description }}</a>
+
+                    <!-- Truncated Description -->
+                    <div class="mb-3 flex-grow-1">
+                        <p>{{ blog.description|truncatechars:25 }}</p>
                     </div>
-                    <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'blog' %}">Explore More</a>
+
+                    <!-- Explore More -->
+                    <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'blog_detail' blog.id %}">Explore More</a>
                 </div>
             </div>
             {% endfor %}
         </div>
+
+        <!-- Read More Button -->
+        <div class="text-center mt-5">
+            <a href="{% url 'blog' %}" class="btn btn-outline-primary rounded-pill px-5 py-2">Read More Blogs</a>
+        </div>
     </div>
 </div>
 <!-- Blog End -->
+
+
 
 
 

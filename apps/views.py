@@ -32,6 +32,11 @@ def blog(request):
     }
     return render(request, 'blog.html', context)
 
+def blog_detail(request, id):
+    blog = BlogDetails.objects.get(id=id)
+    return render(request, 'blog_detail.html', {'blog': blog})
+
+
 
 def contact(request):
     if request.method == 'POST':
@@ -56,25 +61,27 @@ def faq(request):
 
 
 def index(request):
-    services = Services.objects.all()
+    services = Services.objects.all()[:4]  # Only fetch the first 4 services
     projects = Projects.objects.all()
-    blogs = BlogDetails.objects.all()
+    blogs = BlogDetails.objects.all()[:3]
     teams = Team.objects.all()
     testimonials = Testimonial.objects.all()
     faqs = Faq.objects.all()
     sliders = Slider.objects.all()
     about = About.objects.first()
+    
     context = {
         'services': services,
         'projects': projects,
-        'blogs' : blogs,
-        'teams' : teams,
-        'testimonials' : testimonials,
+        'blogs': blogs,
+        'teams': teams,
+        'testimonials': testimonials,
         'faqs': faqs,
         'sliders': sliders,
         'about': about,
     }
     return render(request, 'index.html', context)
+
 
 
 def projects(request):
@@ -85,6 +92,10 @@ def projects(request):
         'faqs': faqs,
     }
     return render(request, 'project.html',context)
+
+def project_detail(request, id):
+    project = get_object_or_404(Projects, id=id)
+    return render(request, 'project_detail.html', {'project': project})
 
 
 def services(request):
