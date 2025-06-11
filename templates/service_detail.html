@@ -2,56 +2,81 @@
 {% block title %}{{ service.title }} - Investa{% endblock %}
 
 {% block content %}
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h4 class="modal-title mb-0" id="exampleModalLabel">Search by keyword</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
+<!-- Modal Search Start -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h4 class="modal-title mb-0" id="exampleModalLabel">Search by keyword</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center">
+                <div class="input-group w-75 mx-auto d-flex">
+                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                 </div>
             </div>
         </div>
-        <!-- Modal Search End -->
+    </div>
+</div>
+<!-- Modal Search End -->
 
-        <!-- Header Start -->
-        <div class="container-fluid bg-breadcrumb">
-            <div class="bg-breadcrumb-single"></div>
-            <div class="container text-center py-5" style="max-width: 900px;">
-                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Services</h4>
-                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active text-primary">Service</li>
-                </ol>    
-            </div>
-        </div>
-        <!-- Header End -->
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="bg-breadcrumb-single"></div>
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Services</h4>
+        <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item active text-primary">{{ service.title }}</li>
+        </ol>    
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Main Content -->
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
+        <!-- Service Detail (Left) -->
+        <div class="col-lg-8">
             <!-- Title -->
-            <h1 class="display-5 fw-bold text-primary mb-4">{{ service.title }}</h1>
+            <h1 class="display-5 fw-bold text-primary mb-4 text-center">{{ service.title }}</h1>
 
             <!-- Image -->
-            <div class="mb-4">
+            <div class="mb-4 text-center">
                 <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover; width: 100%;">
             </div>
 
             <!-- Description -->
             <p class="lead text-muted" style="font-size: 18px; line-height: 1.8;">
-                {{ service.content }}
+                {{ service.content|linebreaks }}
             </p>
+        </div>
 
-          
+        <!-- Recent Services (Right) -->
+        <div class="col-lg-4" style="margin-top: 60px;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title border-bottom pb-2 mb-3">Recent Services</h5>
+                    {% for recent in recent_services %}
+                        <div class="d-flex mb-3">
+                            <img src="{{ recent.image.url }}" alt="{{ recent.title }}" class="rounded shadow-sm me-3" style="width: 70px; height: 70px; object-fit: cover;">
+                            <div>
+                                <a href="{% url 'service_detail' recent.id %}" class="text-dark fw-semibold d-block mb-1" style="text-decoration: none;">
+                                    {{ recent.title|truncatewords:6 }}
+                                </a>
+                                
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No recent services found.</p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<!-- End Main Content -->
+
 {% endblock %}

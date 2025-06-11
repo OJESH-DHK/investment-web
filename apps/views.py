@@ -32,9 +32,12 @@ def blog(request):
     }
     return render(request, 'blog.html', context)
 
+
 def blog_detail(request, id):
     blog = BlogDetails.objects.get(id=id)
-    return render(request, 'blog_detail.html', {'blog': blog})
+    recent_blogs = BlogDetails.objects.exclude(id=id).order_by('-created_at')[:5]
+    return render(request, 'blog_detail.html', {'blog': blog, 'recent_blogs': recent_blogs})
+
 
 
 
@@ -111,7 +114,11 @@ def services(request):
 
 def service_detail(request, id):
     service = get_object_or_404(Services, id=id)
-    return render(request, 'service_detail.html', {'service': service})
+    recent_services = Services.objects.exclude(id=id).order_by('-id')[:3]  # Show 3 most recent services except the current one
+    return render(request, 'service_detail.html', {
+        'service': service,
+        'recent_services': recent_services
+    })
 
 def team(request):
     teams = Team.objects.all()
