@@ -4,58 +4,58 @@
 {% block title %}team - Investa{% endblock %}
 
 {% block content %}
-                <div class="container-fluid bg-breadcrumb">
-        <div class="bg-breadcrumb-single"></div>
-        <div class="container text-center py-5" style="max-width: 900px;">
-            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Team</h4>
-            <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-primary">Team</li>
-            </ol>
-        </div>
+<div class="container-fluid bg-breadcrumb">
+    <div class="bg-breadcrumb-single"></div>
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Team</h4>
+        <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item active text-primary">Team</li>
+        </ol>
     </div>
+</div>
 
-        <div class="container-fluid team pb-5">
-            <div class="container pb-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h4 class="text-primary">Our Team</h4>
-                    <h1 class="display-4">Our Investa Company Dedicated Team Member</h1>
-                </div>
-                <div class="row g-4 justify-content-center">
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                        {%for team in teams %}
-                        <div class="team-item rounded">
-                            <div class="team-img">
-                                <img src="{{ team.image.url }}" class="img-fluid w-100 rounded-top" alt="Image">
-                                <div class="team-icon">
-                               
-                                    <div class="team-icon-share">
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href="{{team.instagram_link}}"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-3" href="{{team.facebook_link}}"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-primary btn-sm-square text-white rounded-circle mb-0" href="{{team.twitter_link}}"><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                
-                            <div class="team-content bg-dark text-center rounded-bottom p-4">
-                                <div class="team-content-inner rounded-bottom">
-                                    <h4 class="text-white">{{team.name}}</h4>
-                                    <p class="text-muted mb-0">{{team.position}}</p>
-                                </div>
-                            </div>
-                            
+<div class="container-fluid team pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h4 class="text-primary">Our Team</h4>
+            <h1 class="display-4">Our Investa Company Dedicated Team Member</h1>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            {% for team in teams %}
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item rounded h-100 d-flex flex-column">
+                    <div class="team-img position-relative">
+                        <img src="{{ team.image.url }}" class="img-fluid w-100 rounded-top" alt="{{ team.name }}" style="object-fit: cover; height: 250px;">
+                        <div class="team-icon position-absolute bottom-0 start-50 translate-middle-x mb-3 d-flex justify-content-center gap-2">
+                            {% if team.instagram_link %}
+                            <a class="btn btn-primary btn-sm-square text-white rounded-circle" href="{{ team.instagram_link }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            {% endif %}
+                            {% if team.facebook_link %}
+                            <a class="btn btn-primary btn-sm-square text-white rounded-circle" href="{{ team.facebook_link }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            {% endif %}
+                            {% if team.twitter_link %}
+                            <a class="btn btn-primary btn-sm-square text-white rounded-circle" href="{{ team.twitter_link }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% endif %}
                         </div>
-                        {% endfor %}
                     </div>
-                   
 
-                            </div>
-                        </div>
+                    <div class="team-content bg-dark text-center rounded-bottom p-4 mt-auto">
+                        <h4 class="text-white">{{ team.name }}</h4>
+                        <p class="text-muted mb-0">{{ team.position }}</p>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        <!-- Team End -->
-
-      {% endblock %}
+    </div>
+</div>
+{% endblock %}

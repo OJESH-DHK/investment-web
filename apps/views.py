@@ -64,7 +64,7 @@ def faq(request):
 
 
 def index(request):
-    services = Services.objects.all()[:4]  # Only fetch the first 4 services
+    services = Services.objects.all()[:4]
     projects = Projects.objects.all()
     blogs = BlogDetails.objects.all()[:3]
     teams = Team.objects.all()
@@ -114,7 +114,7 @@ def services(request):
 
 def service_detail(request, id):
     service = get_object_or_404(Services, id=id)
-    recent_services = Services.objects.exclude(id=id).order_by('-id')[:3]  # Show 3 most recent services except the current one
+    recent_services = Services.objects.exclude(id=id).order_by('-id')[:3] 
     return render(request, 'service_detail.html', {
         'service': service,
         'recent_services': recent_services
@@ -138,6 +138,7 @@ def testimonials(request):
 
 def fourzerofour(request):
     return render(request,'404.html')
+
 
 
 
