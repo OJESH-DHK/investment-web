@@ -133,13 +133,22 @@
     <div class="footer-item d-flex flex-column">
         <!-- Logo Added Here -->
         <a href="{% url 'index' %}" class="navbar-brand p-0 mb-3">
-            <img src="{{ org.logo.url }}" alt="Investa" height="90">
+            <img src="{{ org.logo.url }}" alt="Investa" class="footer-logo">
         </a>
 
         <!-- Organization Name -->
         <h5 class="text-white">{{ org.name }}</h5>
     </div>
 </div>
+
+<style>
+  /* Fixed size logo with aspect ratio */
+  .footer-logo {
+    width: 150px;
+    height: 90px;
+    object-fit: contain; /* Keeps aspect ratio */
+  }
+</style>
 
 
             <!-- Quick Links -->
